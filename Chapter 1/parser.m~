@@ -1,0 +1,7 @@
+function result = parse( str )
+%PARSE parser of arithmetic equations
+%   Detailed explanation goes here
+
+
+end
+
