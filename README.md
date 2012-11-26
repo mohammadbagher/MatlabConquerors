@@ -1,4 +1,4 @@
 MatlabConquerors
 ================
 
-Matlab Project by: [MohammadBagher Tabrizi, Ali Babaei, Majid Rahiminezhad, Mohammad Mahtabi:D:D]test git! :)
+Matlab Project by: [MohammadBagher Tabrizi, Ali Babaei Cheshme Ahmad Rezaei, Majid Rahiminezhad, Mohammad Mahtabi:D:D]
