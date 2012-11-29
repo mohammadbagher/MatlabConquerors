@@ -22,7 +22,7 @@ function varargout = ChapterThree(varargin)
 
 % Edit the above text to modify the response to help ChapterThree
 
-% Last Modified by GUIDE v2.5 25-Nov-2012 02:09:56
+% Last Modified by GUIDE v2.5 29-Nov-2012 13:19:19
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
@@ -82,6 +82,12 @@ function edit2_Callback(hObject, eventdata, handles)
 % Hints: get(hObject,'String') returns contents of edit2 as text
 %        str2double(get(hObject,'String')) returns contents of edit2 as a double
 
+ax=handles.axes2;
+FuncString=get(handles.edit2,'string');
+cla(ax);
+set(handles.axes2,'visible','off');
+text1=text(0, 0, FuncString, 'Parent', ax);
+set(text1,'FontName','Courier New','FontSize',15);
 
 % --- Executes during object creation, after setting all properties.
 function edit2_CreateFcn(hObject, eventdata, handles)
@@ -138,11 +144,24 @@ value=get(hObject,'Value');
 if value
     set(handles.popupmenu1,'visible','off');
     set(hObject,'string','Change To Interpolation Mode');
+    set(handles.togglebutton2,'enable','on');
     set(handles.uipanel4,'visible','on');
+    value2=get(handles.togglebutton2,'Value');
+    if value2
+        set(handles.edit2,'visible','on');
+        set(handles.uipanel5,'visible','on');
+    else
+        set(handles.edit2,'visible','off');
+        set(handles.uipanel5,'visible','off');
+    end
 else
+    
+    set(handles.edit2,'visible','off');
+    set(handles.uipanel5,'visible','off');
     set(handles.popupmenu1,'visible','on');
     set(hObject,'string','Change To Curvfitting Mode');
     set(handles.uipanel4,'visible','off');
+    set(handles.togglebutton2,'enable','off');
 end
 
 
@@ -156,10 +175,12 @@ function togglebutton2_Callback(hObject, eventdata, handles)
 
 value=get(hObject,'Value');
 if value
+    set(handles.uipanel5,'visible','on');
     set(handles.edit2,'visible','on');
     set(hObject,'string','Change to with Points Mode');
     set(handles.uitable1,'visible','off');
 else
+    set(handles.uipanel5,'visible','off');
     set(handles.edit2,'visible','off');
     set(handles.uitable1,'visible','on');
     set(hObject,'string','Change to with Function Mode');
@@ -176,9 +197,19 @@ function uitable1_CellEditCallback(hObject, eventdata, handles)
 %	NewData: EditData or its converted form set on the Data property. Empty if Data was not changed
 %	Error: error string when failed to convert EditData to appropriate value for Data
 % handles    structure with handles and user data (see GUIDATA)
+selected=(get(handles.popupmenu1,'Value'));
+if (selected>=1)
+    Interpolate(selected);
+end
 
-p=get(hObject,'data')
-scatter(handles.axes1,p);
+ax=handles.axes2;
+FuncString=get(handles.edit2,'string');
+cla(ax);
+text(0.5, 0.5, FuncString, 'Parent', ax);
+
+%set(,'text','salam');
+%p=get(hObject,'data')
+%scatter(handles.axes1,p);
 
 
 % --- Executes on button press in pushbutton2.
@@ -186,3 +217,75 @@ function pushbutton2_Callback(hObject, eventdata, handles)
 % hObject    handle to pushbutton2 (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
+
+
+% --- Executes during object creation, after setting all properties.
+function uipanel4_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to uipanel4 (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    empty - handles not created until after all CreateFcns called
+
+
+% --- Executes during object creation, after setting all properties.
+function alphaabetax_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to alphaabetax (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    empty - handles not created until after all CreateFcns called
+
+% Hint: place code in OpeningFcn to populate alphaabetax
+rgb = imread('alphaabetax.png');
+%image(rgb); title('RGB image');
+axes(hObject); % Switches focus to this axes object.
+imshow(rgb); % Display it with some command such as
+
+
+% --- Executes during object creation, after setting all properties.
+function alnx_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to alnx (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    empty - handles not created until after all CreateFcns called
+
+% Hint: place code in OpeningFcn to populate alnx
+rgb = imread('alnx.png');
+%image(rgb); title('RGB image');
+axes(hObject); % Switches focus to this axes object.
+imshow(rgb); % Display it with some command such as
+
+
+% --- Executes during object creation, after setting all properties.
+function axb_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to axb (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    empty - handles not created until after all CreateFcns called
+
+% Hint: place code in OpeningFcn to populate axb
+rgb = imread('axb.png');
+%image(rgb); title('RGB image');
+axes(hObject); % Switches focus to this axes object.
+imshow(rgb); % Display it with some command such as
+
+
+% --- Executes during object creation, after setting all properties.
+function oaxb_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to oaxb (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    empty - handles not created until after all CreateFcns called
+
+% Hint: place code in OpeningFcn to populate oaxb
+rgb = imread('alphaabetax.png');
+%image(rgb); title('RGB image');
+axes(hObject); % Switches focus to this axes object.
+imshow(rgb); % Display it with some command such as
+
+
+% --- Executes during object creation, after setting all properties.
+function aixi_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to aixi (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    empty - handles not created until after all CreateFcns called
+
+% Hint: place code in OpeningFcn to populate aixi
+rgb = imread('alphaabetax.png');
+%image(rgb); title('RGB image');
+axes(hObject); % Switches focus to this axes object.
+imshow(rgb); % Display it with some command such as

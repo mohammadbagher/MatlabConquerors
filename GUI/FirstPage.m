@@ -117,7 +117,7 @@ uistack(ha,'bottom');
 
 % Load in a background image and display it using the correct colors
 % The image used below, is in the Image Processing Toolbox. If you do not have %access to this toolbox, you can use another image file instead.
-I=imread('1.jpg');
+I=imread('1.png');
 hi = imagesc(I)
 colormap gray
 
