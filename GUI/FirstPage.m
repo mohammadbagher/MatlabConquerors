@@ -62,6 +62,7 @@ handles.output = hObject;
 % Update handles structure
 guidata(hObject, handles);
 
+
 % UIWAIT makes FirstPage wait for user response (see UIRESUME)
 % uiwait(handles.figure1);
 
@@ -194,7 +195,11 @@ function chapter3_Callback(hObject, eventdata, handles)
 % hObject    handle to chapter3 (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
-ChapterThree;
+try
+        h=ChapterThree();
+        show(h);
+    catch e
+end
 
 % --- Executes during object creation, after setting all properties.
 function uipanel3_CreateFcn(hObject, eventdata, handles)

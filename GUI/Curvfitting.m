@@ -1,0 +1,2 @@
+function []=Curvfitting(y)
+y
