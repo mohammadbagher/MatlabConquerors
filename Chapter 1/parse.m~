@@ -1,10 +1,31 @@
-function result = parse( str )
+function result = find_vars(str)
+    global findvars;
+    global findvars;
+    findvars = true;
+    parse(str);
+    result = variables;
+end
+
+function result = evaluate(str, vars)
+    global variables;
+    global findvars;
+    variables = vars;
+    findvars = false;
+    result = parse(str);
+end
+
+function result = parse(str)
 %PARSE parser of arithmetic equations
 %   parser of chapter 1
-
-    global tokens, global head;
+    global tokens;
+    global head;
+    global variables;
+    
     tokens = tokenizeString(str);
     head = 1;
+    if (findvars == true)
+        variables = [];
+    end
     parse_e()
 end
 
@@ -61,6 +82,8 @@ function result = parse_p()
 end
 
 function result = parse_a()
+    global variables;
+    global findvars;
     if(match('('))
         result = parse_e();
         if(~match(')'))
@@ -69,11 +92,12 @@ function result = parse_a()
     elseif (match_identifier())
         result = 0;
         name = char(get_token());
-        sprintf('identifier found: %s', name)
+        variables{end + 1} = name;
+        %sprintf('identifier found: %s', name)
     elseif (match_number())
         num = str2num(char(get_token()));
         result = num;
-        sprintf('number found: %d', num)
+        %sprintf('number found: %d', num)
     else
         result = 0;
         sprintf('error: no atomix expression')
@@ -133,15 +157,20 @@ end
 function result = tokenizeString(input)
     string = '';
     last = ' ';
-    for i = 1 : size(input)
+    for i = 1 : size(input, 2)
         if(isletter(input(i)))
             if(~isletter(last))
                 string(end + 1) = ' ';
             end
-        elseif(isnumeric(input(i)))
-            if(isnumberc(last) || isletter(last) || strcmp('.', ;
+        elseif(strcmp('.', input(i)) || isstrprop(input(i), 'digit'))
+            if(~isstrprop(last, 'digit') && ~isletter(last) && ~strcmp('.', last))
+                string(end + 1) = ' ';
+            end
         else
+            string(end + 1) = ' ';
         end
+        string(end + 1) = input(i);
+        last = input(i);
     end
     tokens = {};
     while not(isempty(string))
