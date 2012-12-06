@@ -1,4 +1,4 @@
-function [] = nddp(X,Y)
+function [] = nddp(X,Y,axes)
 x = X; y = Y;
 n = length(x);
 
@@ -57,13 +57,14 @@ x_eval = min(x):0.1:max(x);
 
 y_eval = polyval(P,x_eval);
 
-plot(x_eval,y_eval); hold on;
+plot(axes,x_eval,y_eval); hold on;
 
 % plot points used
 
 for i = 1:n
 
- plot(x(i),y(i),'or');
+ plot(axes,x(i),y(i),'or');
+end
 
 end
 

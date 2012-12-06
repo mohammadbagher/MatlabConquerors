@@ -1,4 +1,4 @@
-function [ ] = bestcurvefitting( X , Y )
+function [ ] = bestcurvefitting( X , Y ,axes)
 x=X;
 y=Y;
 n=1;
@@ -61,9 +61,9 @@ y_request=y5;
 
 end
 
-plot(x,y_request);hold on;
+plot(axes,x,y_request);hold on;
 for g=1:n
-    plot(X(g),Y(g),'or');
+    plot(axes,X(g),Y(g),'or');
 end
 
 

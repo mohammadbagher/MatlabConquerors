@@ -1,4 +1,4 @@
-function [] = nfcp(X,Y,X_request)
+function [func] = nfcp(X,Y,X_request,axes)
 x = X; y = Y;
 n = length(x);
 
@@ -37,7 +37,7 @@ prod=1;
  end
  
 
-plot(x_req,y_req,'+');hold on;
+plot(axes,x_req,y_req,'+');hold on;
 
 x_sample=x(1):h/10:x(n);
 for k=2:length(x_sample)
@@ -51,13 +51,23 @@ prod=1;
  end
 
 
-plot(x_req,y_req,'--');
+plot(axes,x_req,y_req,'--');
 end
 
 for i = 1:n
 
- plot(x(i),y(i),'or');
+ plot(axes,x(i),y(i),'or');
 end
+%%%%%%%%%%func
+x_req=sym('x');
+r =sym((x_req-x(floor(n/2)))/h); 
+y_req=sym(y(floor(n/2)));
+prod=sym(1);
+ for j=0:n-2
+     prod=prod*((r+(-1)^(j)*floor((j+1)/2))/(j+1));
+     y_req=y_req+prod*DD(ceil((n-j+1)/2),j+3);
+ end
+func=expand(y_req);
 
 end
 

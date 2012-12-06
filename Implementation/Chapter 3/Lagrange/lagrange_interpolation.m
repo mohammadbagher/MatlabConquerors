@@ -1,4 +1,4 @@
-function[y_req] = lagrange_interpolation(x,y,x_request)
+function[func] = lagrange_interpolation(x,y,x_request,axes)
 X=x;
 Y=y;
 n=length(X);
@@ -14,7 +14,7 @@ for k=1:n
     for index = 1:n
         if(index ~= k && X(index) ~= X(k))
             surat= surat*(x_req-x(index));
-            makhraj = makhraj * ((X(k) - X(index))^-1);
+            makhraj = makhraj / (X(k) - X(index));
         end
     end
    l(k)=surat/makhraj;
@@ -23,9 +23,9 @@ y_req=0;
 for j=1:n
     y_req=y_req+l(j)*Y(j);
 end
-plot(x_req,y_req,'+');hold on;
+plot(axes,x_req,y_req,'+');hold on;
 
-x_sample=X(1):1/(10*n):X(n);
+x_sample=X(1):1/(7*n+1):X(n);
 for h=1:length(x_sample)
    x_req=x_sample(h);
 for k=1:n                    
@@ -34,7 +34,7 @@ for k=1:n
     for index = 1:n
         if(index ~= k && X(index) ~= X(k))
             surat= surat*(x_req-x(index));
-            makhraj = makhraj * ((X(k) - X(index))^-1);
+            makhraj = makhraj / (X(k) - X(index));
         end
     end
    l(k)=surat/makhraj;
@@ -43,12 +43,30 @@ y_req=0;
 for j=1:n
     y_req=y_req+l(j)*Y(j);
 end
-plot(x_req,y_req,'--'); 
+plot(axes,x_req,y_req); 
 end
 for g=1:n
-    plot(X(g),Y(g),'or');
+    plot(axes,X(g),Y(g),'or');
 end
-
+%%%%%%%func
+l = sym(zeros(n));
+vorudi=sym('x');
+for k=1:n                    
+    makhraj = 1;    
+    surat= 1;
+    for index = 1:n
+        if(index ~= k && X(index) ~= X(k))
+            surat= surat*(vorudi-x(index));
+            makhraj = makhraj * ((X(k) - X(index))^-1);
+        end
+    end
+   l(k)=vpa(sym(surat)/sym(makhraj));
+end
+func=0;
+for j=1:n
+    func=func+l(j)*Y(j);
+end
+func=expand(func);
 end
 
 
