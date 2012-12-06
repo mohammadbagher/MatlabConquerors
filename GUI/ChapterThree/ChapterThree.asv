@@ -51,8 +51,11 @@ function ChapterThree_OpeningFcn(hObject, eventdata, handles, varargin)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 % varargin   command line arguments to ChapterThree (see VARARGIN)
-    set(handles.uipanel4,'Position',[205.5 249.75 262.5 150.75]);
+    position=get(handles.uipanel7,'position');
+    set(handles.uipanel4,'Position',position);
 
+    addpath(genpath('G:\Workspace\Matlab\MatlabConquerors'));
+    
     rgb = imread('alphaabetax.png');
     axes(handles.alphaabetax); 
     imshow(rgb);
@@ -204,38 +207,38 @@ function uitable1_CellEditCallback(hObject, eventdata, handles)
 % handles    structure with handles and user data (see GUIDATA)
 
 
-% curvfitting=(get(handles.togglebutton1,'Value'));
-% if (curvfitting) % Curfitting
-%     x=get(handles.uipanel4,'SelectedObject');
-%     xtag = get(x, 'Tag');
-%     if strcmp(xtag,'radioalhpaabetax')
-%         Curvfitting(1);
-%     elseif strcmp(xtag,'radioalnx')
-%         Curvfitting(2);
-%     elseif strcmp(xtag,'radioaxb')
-%         Curvfitting(3);
-%     elseif strcmp(xtag,'radiooaxb')
-%         Curvfitting(4);
-%     elseif strcmp(xtag,'radioaixi')
-%         Curvfitting(5);
-%     end
-% else
-%     x=get(handles.uipanel7,'SelectedObject');
-%     xtag = get(x, 'Tag');
-%     if strcmp(xtag,'radiologrange')
-%         Interpolate(1);
-%     elseif strcmp(xtag,'radioNDD')
-%         Interpolate(2);
-%     elseif strcmp(xtag,'radioNF')
-%         Interpolate(3);
-%     elseif strcmp(xtag,'radioNB')
-%         Interpolate(4);
-%     elseif strcmp(xtag,'radioNFC')
-%         Interpolate(5);
-%     elseif strcmp(xtag,'radioNBC')
-%         Interpolate(6);
-%     end  
-% end
+curvfitting=(get(handles.togglebutton1,'Value'));
+if (curvfitting) % Curfitting
+    x=get(handles.uipanel4,'SelectedObject');
+    xtag = get(x, 'Tag');
+    if strcmp(xtag,'radioalhpaabetax')
+        Curvfitting(1);
+    elseif strcmp(xtag,'radioalnx')
+        Curvfitting(2);
+    elseif strcmp(xtag,'radioaxb')
+        Curvfitting(3);
+    elseif strcmp(xtag,'radiooaxb')
+        Curvfitting(4);
+    elseif strcmp(xtag,'radioaixi')
+        Curvfitting(5);
+    end
+else
+    x=get(handles.uipanel7,'SelectedObject');
+    xtag = get(x, 'Tag');
+    if strcmp(xtag,'radiologrange')
+        Interpolate(1);
+    elseif strcmp(xtag,'radioNDD')
+        Interpolate(2);
+    elseif strcmp(xtag,'radioNF')
+        Interpolate(3);
+    elseif strcmp(xtag,'radioNB')
+        Interpolate(4);
+    elseif strcmp(xtag,'radioNFC')
+        Interpolate(5);
+    elseif strcmp(xtag,'radioNBC')
+        Interpolate(6);
+    end  
+end
 
 % ax=handles.axes2;
 % FuncString=get(handles.edit2,'string');
