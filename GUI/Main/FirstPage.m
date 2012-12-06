@@ -52,6 +52,8 @@ function FirstPage_OpeningFcn(hObject, eventdata, handles, varargin)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 % varargin   command line arguments to FirstPage (see VARARGIN)
+addpath(genpath('G:\Workspace\Matlab\MatlabConquerors'));
+
 bg_image = imread('2.jpg');
 set(handles.chapter2, 'CData', bg_image);
 
@@ -61,6 +63,7 @@ handles.output = hObject;
 
 % Update handles structure
 guidata(hObject, handles);
+
 
 % UIWAIT makes FirstPage wait for user response (see UIRESUME)
 % uiwait(handles.figure1);
@@ -117,7 +120,7 @@ uistack(ha,'bottom');
 
 % Load in a background image and display it using the correct colors
 % The image used below, is in the Image Processing Toolbox. If you do not have %access to this toolbox, you can use another image file instead.
-I=imread('1.jpg');
+I=imread('1.png');
 hi = imagesc(I)
 colormap gray
 
@@ -194,7 +197,11 @@ function chapter3_Callback(hObject, eventdata, handles)
 % hObject    handle to chapter3 (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
-ChapterThree;
+try
+        h=ChapterThree();
+        show(h);
+    catch e
+end
 
 % --- Executes during object creation, after setting all properties.
 function uipanel3_CreateFcn(hObject, eventdata, handles)
