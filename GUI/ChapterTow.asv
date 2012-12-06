@@ -152,8 +152,7 @@ function pushbutton1_Callback(hObject, eventdata, handles)
 % hObject    handle to pushbutton1 (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
-close(ChapterTwo);
-FirstPage();
+
 
 % --- Executes on button press in pushbutton2.
 function pushbutton2_Callback(hObject, eventdata, handles)
@@ -334,10 +333,9 @@ function popupmenu2_Callback(hObject, eventdata, handles)
 %        contents{get(hObject,'Value')} returns selected item from popupmenu2
 value = get(hObject,'value');
 if value==1
-    set(handles.text15,'string','Precision :');
-else
-    set(handles.text15,'string','Steps :');
-end
+    h
+
+
 
 % --- Executes during object creation, after setting all properties.
 function popupmenu2_CreateFcn(hObject, eventdata, handles)
