@@ -25,21 +25,21 @@ xis = zeros(max_step,1);
 xis(1,1) = x1;
 xis(2,1) = x2;
 
-for i = 1:max_step+2
+for i = 3:max_step+2
     xis(i,1) = 0.5*(xis(i-1,1) + xis(i-2,1));
     f3 = feval(func,xis(i,1));
     f2 = feval(func,xis(i-1,1));
-    if(abs(xis(i,1)-xis(i-1,1))<=tol || f3<tol)
+    if(abs(xis(i,1)-xis(i-1,1))<=tol )
         root = xis(i,1);
         return;
     end
     if f3 == 0.0
-        root = x3; return;
+        root = xis(i,1); return;
     end
     if f2*f3 < 0.0
-        x1 = x3;
+        x1 = xis(i,1);
     else
-        x2 = x3;
+        x2 = xis(i,1);
     end
 end
 root = (x1 + x2)/2;
