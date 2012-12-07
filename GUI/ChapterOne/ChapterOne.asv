@@ -178,13 +178,13 @@ function pushbutton1_Callback(hObject, eventdata, handles)
 % handles    structure with handles and user data (see GUIDATA)
 
 str=get(handles.edit2,'string');
-str=str(6:end);
 vars=getVariables(str);
 interytable=get(handles.uitable1,'data');
 exactValues=interytable(:,2);
 absolutErrors=interytable(:,3);
 exactValues=exactValues';
 absolutErrors=absolutErrors';
+absolutErrors{4}
 
 n=size(exactValues,2);
 sendingvalues=0;
@@ -195,13 +195,10 @@ for j=1:n
     sendingvalues(j)=tempError;
     sendingerrors(j)=tempValue;
 end
-finaltable=evaluate(str,vars,sendingvalues,sendingerrors);
-set(handles.uitable2,'data',finaltable{1});
-for i=2:size(finaltable,2)
-data = get(handles.uitable2,'data');
-newRowdata = cat(1,data,finaltable{i});
-set(handles.uitable2,'data',newRowdata);  
-end
+finaltaevaluate(str,vars,sendingvalues,sendingerrors);
+
+
+
 
 
 
