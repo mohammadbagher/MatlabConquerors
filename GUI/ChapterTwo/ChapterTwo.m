@@ -22,7 +22,7 @@ function varargout = ChapterTow(varargin)
 
 % Edit the above text to modify the response to help ChapterTow
 
-% Last Modified by GUIDE v2.5 07-Dec-2012 23:54:38
+% Last Modified by GUIDE v2.5 08-Dec-2012 01:53:02
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
@@ -126,7 +126,16 @@ function pushbutton4_Callback(hObject, eventdata, handles)
 % hObject    handle to pushbutton4 (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
-ChapterTwoAnswer(handles);
+if(get(handles.ignore, 'Value') ~= 1);
+    ChapterTwoAnswer(handles);
+end
+
+method_code = get(handles.method, 'Value');
+a = get(handles.a, 'String');
+b = get(handles.b, 'String');
+tol = get(handles.tol, 'String');
+max_step = get(handles.max_step, 'String');
+ 
 
 
 % --- Executes on selection change in popupmenu2.
@@ -166,22 +175,68 @@ set(handles.edit1,'string',string);
 
 
 
-function edit10_Callback(hObject, eventdata, handles)
-% hObject    handle to edit10 (see GCBO)
+function sigfig_Callback(hObject, eventdata, handles)
+% hObject    handle to sigfig (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 
-% Hints: get(hObject,'String') returns contents of edit10 as text
-%        str2double(get(hObject,'String')) returns contents of edit10 as a double
+% Hints: get(hObject,'String') returns contents of sigfig as text
+%        str2double(get(hObject,'String')) returns contents of sigfig as a double
 
 
 % --- Executes during object creation, after setting all properties.
-function edit10_CreateFcn(hObject, eventdata, handles)
-% hObject    handle to edit10 (see GCBO)
+function sigfig_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to sigfig (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    empty - handles not created until after all CreateFcns called
 
 % Hint: edit controls usually have a white background on Windows.
+%       See ISPC and COMPUTER.
+if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
+    set(hObject,'BackgroundColor','white');
+end
+
+
+% --- Executes on selection change in popupmenu3.
+function popupmenu3_Callback(hObject, eventdata, handles)
+% hObject    handle to popupmenu3 (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+% Hints: contents = cellstr(get(hObject,'String')) returns popupmenu3 contents as cell array
+%        contents{get(hObject,'Value')} returns selected item from popupmenu3
+
+
+% --- Executes during object creation, after setting all properties.
+function popupmenu3_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to popupmenu3 (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    empty - handles not created until after all CreateFcns called
+
+% Hint: popupmenu controls usually have a white background on Windows.
+%       See ISPC and COMPUTER.
+if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
+    set(hObject,'BackgroundColor','white');
+end
+
+
+% --- Executes on selection change in method.
+function method_Callback(hObject, eventdata, handles)
+% hObject    handle to method (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+% Hints: contents = cellstr(get(hObject,'String')) returns method contents as cell array
+%        contents{get(hObject,'Value')} returns selected item from method
+
+
+% --- Executes during object creation, after setting all properties.
+function method_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to method (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    empty - handles not created until after all CreateFcns called
+
+% Hint: popupmenu controls usually have a white background on Windows.
 %       See ISPC and COMPUTER.
 if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
     set(hObject,'BackgroundColor','white');
