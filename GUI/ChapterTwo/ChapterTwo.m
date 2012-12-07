@@ -22,7 +22,7 @@ function varargout = ChapterTow(varargin)
 
 % Edit the above text to modify the response to help ChapterTow
 
-% Last Modified by GUIDE v2.5 07-Dec-2012 12:23:41
+% Last Modified by GUIDE v2.5 07-Dec-2012 23:54:38
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
@@ -126,7 +126,7 @@ function pushbutton4_Callback(hObject, eventdata, handles)
 % hObject    handle to pushbutton4 (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
-ChapterTwoAnswer();
+ChapterTwoAnswer(handles);
 
 
 % --- Executes on selection change in popupmenu2.
@@ -163,3 +163,26 @@ function adivb_Callback(hObject, eventdata, handles)
 string = get(handles.edit1,'string');
 string = strcat(string,'\frac{*}{*}');
 set(handles.edit1,'string',string);
+
+
+
+function edit10_Callback(hObject, eventdata, handles)
+% hObject    handle to edit10 (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+% Hints: get(hObject,'String') returns contents of edit10 as text
+%        str2double(get(hObject,'String')) returns contents of edit10 as a double
+
+
+% --- Executes during object creation, after setting all properties.
+function edit10_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to edit10 (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    empty - handles not created until after all CreateFcns called
+
+% Hint: edit controls usually have a white background on Windows.
+%       See ISPC and COMPUTER.
+if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
+    set(hObject,'BackgroundColor','white');
+end
