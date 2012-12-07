@@ -152,14 +152,10 @@ function abtb_Callback(hObject, eventdata, handles)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 string = get(handles.edit1,'string');
-string = strcat(string,'*^{*}');
-set(handles.edit1,'string',string);
+string = strcat()
 
 % --- Executes on button press in adivb.
 function adivb_Callback(hObject, eventdata, handles)
 % hObject    handle to adivb (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
-string = get(handles.edit1,'string');
-string = strcat(string,'\frac{*}{*}');
-set(handles.edit1,'string',string);
