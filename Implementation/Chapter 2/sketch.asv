@@ -1,0 +1,6 @@
+function sketch( plot_axes, play, puase, next, previous, speed )
+%UNTITLED4 Summary of this function goes here
+%   Detailed explanation goes here
+
+
+end
