@@ -1,0 +1,17 @@
+function root = fixed_point_iterator( gfunc, start, tol )
+%UNTITLED2 Summary of this function goes here
+%   Detailed explanation goes here
+err = zeros(100,1);
+xis = zeros(100,1);
+xis(1,1) = start;
+
+for i=2:max_step+1
+    xis(i,1) = feval(gfunc,xis(i-1));
+    err(i,1) = abs(xis(i,1)-xis(i-1,1));
+    if(abs(xis(i,1)-xis(i-1,1))<tol)
+        root = xis(i,1);
+        return;
+    end
+end
+
+end
