@@ -9,17 +9,9 @@ for i=1:n
     s = a+(i-1)*delta;
     e = a+i*delta;
     if(feval(func,s)*feval(func,e)< 0.0)
-        t = size(intervals,1);
-        intervals(t+1,1) = s;
-        intervals(t+1,2) = e; 
+        intervals(size(intervals)+1,1) = s;
+        intervals(size(intervals),2) = e; 
     end
 end
-s = a+n*delta;
-e=b;
-if(feval(func,s)*feval(func,e)< 0.0)
-    t = size(intervals,1);
-    intervals(t+1,1) = s;
-    intervals(t+1,2) = e; 
-end
-
+s = a+
 end
