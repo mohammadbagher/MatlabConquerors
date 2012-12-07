@@ -1,4 +1,4 @@
-function [] = nddp(X,Y,axes)
+function [x_ans] = nddp(X,Y,x_request,axes)
 x = X; y = Y;
 n = length(x);
 
@@ -52,6 +52,10 @@ P = sum(Prod,1);
 P(1,n)=P(1,n)+y(1);
 
 % plot polynomial p for values x_eval
+
+y_eval = polyval(P,x_request);
+x_ans=y_eval;
+
 
 x_eval = min(x):0.1:max(x);
 

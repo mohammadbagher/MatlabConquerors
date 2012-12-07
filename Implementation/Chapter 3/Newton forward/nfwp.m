@@ -1,4 +1,4 @@
-function [func] = nfwp(X,Y,X_request,axes)
+function [func,x_ans] = nfwp(X,Y,X_request,axes)
 x = X; y = Y;
 n = length(x);
 
@@ -36,7 +36,7 @@ prod=1;
      y_req=y_req+prod*DD(1,j+3);
  end
  
-
+x_ans=y_req;
 plot(axes,x_req,y_req,'+');hold on;
 x_sample=x(1):h/10:x(n);
 for k=2:length(x_sample)
