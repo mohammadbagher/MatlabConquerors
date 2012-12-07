@@ -1,4 +1,4 @@
-function [] = nddp(X,Y)
+function [x_ans] = nddp(X,Y,x_request,axes)
 x = X; y = Y;
 n = length(x);
 
@@ -53,17 +53,22 @@ P(1,n)=P(1,n)+y(1);
 
 % plot polynomial p for values x_eval
 
+y_eval = polyval(P,x_request);
+x_ans=y_eval;
+
+
 x_eval = min(x):0.1:max(x);
 
 y_eval = polyval(P,x_eval);
 
-plot(x_eval,y_eval); hold on;
+plot(axes,x_eval,y_eval); hold on;
 
 % plot points used
 
 for i = 1:n
 
- plot(x(i),y(i),'or');
+ plot(axes,x(i),y(i),'or');
+end
 
 end
 

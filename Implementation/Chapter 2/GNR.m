@@ -1,6 +1,9 @@
-function result = ch2_89100854( n , F , X , step )
-%UNTITLED2 Summary of this function goes here
+function result = GNR( n , F , X , step )
+%GNR generalized newton-raphson method for solving a system of 
+%       non-linear equations.
+%       
 %   Detailed explanation goes here
+% TODO
 names = regexp(sprintf('a%d/',1:n),'/','split');
 syms(names{1:end-1})
 
@@ -47,4 +50,3 @@ for i=1:n
 end
 
 end
-
