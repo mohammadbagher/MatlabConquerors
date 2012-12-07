@@ -22,7 +22,7 @@ function varargout = ChapterOne(varargin)
 
 % Edit the above text to modify the response to help ChapterOne
 
-% Last Modified by GUIDE v2.5 07-Dec-2012 20:54:11
+% Last Modified by GUIDE v2.5 08-Dec-2012 00:36:01
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
@@ -234,6 +234,18 @@ set(handles.axes2,'visible','off');
 laTexFuncString = strcat('$$',FuncString,'$$');
 text1 = text('Interpreter','latex','String',laTexFuncString);
 set(text1,'FontName','Courier New','FontSize',20);
+
+str= get(hObject,'string');
+str=str(6:size(str,2));
+variables=getVariables(str);
+primary_data=repmat({''},size(variables,2),3);
+set(handles.uitable1,'data',primary_data);
+
+ for i=1:size(variables,2)
+     primary_data(i,1)=variables(i);
+ end
+set(handles.uitable1,'data',primary_data);
+
 %fa vaghaa ma vaghaa!!
 
 % --- Executes during object creation, after setting all properties.
@@ -276,3 +288,13 @@ function pushbutton5_Callback(hObject, eventdata, handles)
 % hObject    handle to pushbutton5 (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
+str= get(handles.edit2,'string');
+str=str(6:size(str,2));
+variables=getVariables(str);
+primary_data=repmat({''},size(variables,2),3);
+set(handles.uitable1,'data',primary_data);
+
+ for i=1:size(variables,2)
+     primary_data(i,1)=variables(i);
+ end
+set(handles.uitable1,'data',primary_data);
