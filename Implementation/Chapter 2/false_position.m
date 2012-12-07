@@ -10,16 +10,19 @@ xis = zeros(max_step,1);
 for i=1:max_step
     fa = feval(func,s);
     fb = feval(func,e);
-    if(fa == 0)
+    if fa*fb > 0;
+        error('Root is not bracketed in (a,b)')
+    end
+    if(fa == 0.0)
         root = s;
         return;
     end
-    if(fb == 0)
+    if(fb == 0.0)
         root = e;
         return;
     end
     
-    xis(i,1) = (s*fb-b*fa)/(fb-fa);
+    xis(i,1) = (s*fb-e*fa)/(fb-fa);
     fc = feval(func,xis(i,1));
     if(i~=1 && abs(xis(i-1,1)-xis(i,1))<tol);
         root = xis(i,1);

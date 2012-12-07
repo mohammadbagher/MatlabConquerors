@@ -1,4 +1,4 @@
-function [ A1,A2,A3,A4,B1,B2,B3 ] = sigma( x,y )
+function [ A1,A2,A3,A4,B1,B2,B3 ] = mysigma( x,y )
 A1=0;
 
 for i=1:size(x)

@@ -19,11 +19,11 @@ xis(2,1)=x2;
 for i=3:max_step
     fim1 = feval(func,xis(i-1,1));
     fim2 = feval(func,xis(i-2,1));
-    if(fim1 == 0)
+    if(fim1 == 0.0)
         root = xis(i-1);
         return;
     end
-    if(fim2 == 0)
+    if(fim2 == 0.0)
         root = xis(i-2);
         return;
     end
