@@ -1,4 +1,4 @@
-function [funcreturn,func1,func2,func3,func4,func5,func6 ] = bestcurvefitting( X , Y )
+function [funcreturn,func1,func2,func3,func4,func5,func6 ] = bestcurvefitting(axes, X , Y )
 x=X;
 y=Y;
 func=0;
@@ -88,13 +88,13 @@ func=expand(sym(as4+(ay4*temparr/xfunc)));
 end
 %%%%%%%%%%%%%%%%%%
 
-plot(x,y_request,'+');hold on;
+plot(axes,x,y_request,'+');hold on;
 for g=1:n
-    plot(X(g),Y(g),'or');
+    plot(axes,X(g),Y(g),'or');
 end
 x=min(x):.1:max(x);
 
 funcreturn=expand(func);
-plot(x,eval(func));
+plot(axes,x,eval(func));
 end
 

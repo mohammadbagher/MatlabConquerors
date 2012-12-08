@@ -22,7 +22,7 @@ function varargout = ChapterThree(varargin)
 
 % Edit the above text to modify the response to help ChapterThree
 
-% Last Modified by GUIDE v2.5 05-Dec-2012 02:47:54
+% Last Modified by GUIDE v2.5 08-Dec-2012 10:54:49
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
@@ -218,7 +218,7 @@ function uitable1_CellEditCallback(hObject, eventdata, handles)
 %	NewData: EditData or its converted form set on the Data property. Empty if Data was not changed
 %	Error: error string when failed to convert EditData to appropriate value for Data
 % handles    structure with handles and user data (see GUIDATA)
-
+cla(handles.axes1);
 data=get(handles.uitable1,'Data');
     c=size(data,1);
     XY=get(handles.uitable1,'Data');
@@ -258,8 +258,11 @@ if (curvfitting) % Curfitting
     
     x=get(handles.uipanel4,'SelectedObject');
     xtag = get(x, 'Tag');
-    if strcmp(xtag,'radioalhpaabetax')
-        Curvfitting(1);
+    cla(handles.axes1);
+    if strcmp(xtag,'radioalphaabetax')
+        a=bestCurvefitting(handles.axes1,sendingX,sendingY);
+        a(2)
+        plot(handles.axes1,min(sendingX):.1:max(sendingX),eval(a(2)));
     elseif strcmp(xtag,'radioalnx')
         Curvfitting(2);
     elseif strcmp(xtag,'radioaxb')
@@ -355,3 +358,15 @@ function edit4_CreateFcn(hObject, eventdata, handles)
 if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
     set(hObject,'BackgroundColor','white');
 end
+
+
+% --- Executes when entered data in editable cell(s) in uitable4.
+function uitable4_CellEditCallback(hObject, eventdata, handles)
+% hObject    handle to uitable4 (see GCBO)
+% eventdata  structure with the following fields (see UITABLE)
+%	Indices: row and column indices of the cell(s) edited
+%	PreviousData: previous data for the cell(s) edited
+%	EditData: string(s) entered by the user
+%	NewData: EditData or its converted form set on the Data property. Empty if Data was not changed
+%	Error: error string when failed to convert EditData to appropriate value for Data
+% handles    structure with handles and user data (see GUIDATA)
