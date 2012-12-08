@@ -183,8 +183,7 @@ function pushbutton1_Callback(hObject, eventdata, handles)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 
-str=get(handles.edit2,'string');
-str=str(6:end);
+str=get(handles.edit3,'string');
 vars=getVariables(str);
 interytable=get(handles.uitable1,'data');
 exactValues=interytable(:,2);
@@ -232,6 +231,7 @@ function edit3_Callback(hObject, eventdata, handles)
 %        str2double(get(hObject,'String')) returns contents of edit3 as a double
 ax=handles.axes3;
 FuncString=get(hObject,'string');
+FuncStringNormal=translate(FuncString);
 cla(ax);
 set(handles.axes3,'visible','off');
 %text('Interpreter','latex','String','$$\int_0^x\!\int_y dF(u,v)$$'
@@ -241,8 +241,7 @@ laTexFuncString = strcat('$$',FuncString,'$$');
 text1 = text('Interpreter','latex','String',laTexFuncString);
 set(text1,'FontName','Courier New','FontSize',20);
 
-str= get(hObject,'string');
-str=str(6:size(str,2));
+str=FuncStringNormal;
 variables=getVariables(str);
 primary_data=repmat({''},size(variables,2),3);
 set(handles.uitable1,'data',primary_data);
@@ -294,8 +293,7 @@ function pushbutton5_Callback(hObject, eventdata, handles)
 % hObject    handle to pushbutton5 (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
-str= get(handles.edit2,'string');
-str=str(6:size(str,2));
+str= get(handles.edit3,'string');
 variables=getVariables(str);
 primary_data=repmat({''},size(variables,2),3);
 set(handles.uitable1,'data',primary_data);
