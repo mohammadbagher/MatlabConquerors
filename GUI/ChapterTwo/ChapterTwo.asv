@@ -54,7 +54,7 @@ function ChapterTow_OpeningFcn(hObject, eventdata, handles, varargin)
 
 addpath(genpath('D:\Management\Education+University\Term 5\Numerical Methods\Project Git 2\MatlabConquerors'));
 set(handles.info, 'String','The bisection method in mathematics is a root-finding method which repeatedly bisects an interval and then selects a subinterval in which a root must lie for further processing. It is a very simple and robust method, but it is also relatively slow. Because of this, it is often used to obtain a rough approximation to a solution which is then used as a starting point for more rapidly converging methods.');
-set(handles.equations , 'Data', repmat({''},1,1));
+set(handles.equations
 
 
 
