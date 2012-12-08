@@ -89,12 +89,14 @@ end
 %%%%%%%%%%%%%%%%%%
 
 plot(axes,x,y_request,'+');hold on;
-for g=1:n
-    plot(axes,X(g),Y(g),'or');
-end
+xlabel('points');
+ylabel('approximations');
+plot(axes,X,Y,'or');
 x=min(x):.1:max(x);
 
 funcreturn=expand(func);
 plot(axes,x,eval(func));
+hleg1 = legend('approximatedpoints','firstpoints','bestCurvefitting');
+
 end
 

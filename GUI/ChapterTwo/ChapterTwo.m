@@ -1,35 +1,35 @@
-function varargout = ChapterTow(varargin)
-% CHAPTERTOW MATLAB code for ChapterTow.fig
-%      CHAPTERTOW, by itself, creates a new CHAPTERTOW or raises the existing
+function varargout = ChapterTwo(varargin)
+% CHAPTERTwo MATLAB code for ChapterTwo.fig
+%      CHAPTERTwo, by itself, creates a new CHAPTERTwo or raises the existing
 %      singleton*.
 %
-%      H = CHAPTERTOW returns the handle to a new CHAPTERTOW or the handle to
+%      H = CHAPTERTwo returns the handle to a new CHAPTERTwo or the handle to
 %      the existing singleton*.
 %
-%      CHAPTERTOW('CALLBACK',hObject,eventData,handles,...) calls the local
-%      function named CALLBACK in CHAPTERTOW.M with the given input arguments.
+%      CHAPTERTwo('CALLBACK',hObject,eventData,handles,...) calls the local
+%      function named CALLBACK in CHAPTERTwo.M with the given input arguments.
 %
-%      CHAPTERTOW('Property','Value',...) creates a new CHAPTERTOW or raises the
+%      CHAPTERTwo('Property','Value',...) creates a new CHAPTERTwo or raises the
 %      existing singleton*.  Starting from the left, property value pairs are
-%      applied to the GUI before ChapterTow_OpeningFcn gets called.  An
+%      applied to the GUI before ChapterTwo_OpeningFcn gets called.  An
 %      unrecognized property name or invalid value makes property application
-%      stop.  All inputs are passed to ChapterTow_OpeningFcn via varargin.
+%      stop.  All inputs are passed to ChapterTwo_OpeningFcn via varargin.
 %
 %      *See GUI Options on GUIDE's Tools menu.  Choose "GUI allows only one
 %      instance to run (singleton)".
 %
 % See also: GUIDE, GUIDATA, GUIHANDLES
 
-% Edit the above text to modify the response to help ChapterTow
+% Edit the above text to modify the response to help ChapterTwo
 
-% Last Modified by GUIDE v2.5 08-Dec-2012 05:57:19
+% Last Modified by GUIDE v2.5 09-Dec-2012 00:27:57
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
 gui_State = struct('gui_Name',       mfilename, ...
                    'gui_Singleton',  gui_Singleton, ...
-                   'gui_OpeningFcn', @ChapterTow_OpeningFcn, ...
-                   'gui_OutputFcn',  @ChapterTow_OutputFcn, ...
+                   'gui_OpeningFcn', @ChapterTwo_OpeningFcn, ...
+                   'gui_OutputFcn',  @ChapterTwo_OutputFcn, ...
                    'gui_LayoutFcn',  [] , ...
                    'gui_Callback',   []);
 if nargin && ischar(varargin{1})
@@ -44,28 +44,19 @@ end
 % End initialization code - DO NOT EDIT
 
 
-% --- Executes just before ChapterTow is made visible.
-function ChapterTow_OpeningFcn(hObject, eventdata, handles, varargin)
+% --- Executes just before ChapterTwo is made visible.
+function ChapterTwo_OpeningFcn(hObject, ~, handles, varargin)
 % This function has no output args, see OutputFcn.
 % hObject    handle to figure
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
-% varargin   command line arguments to ChapterTow (see VARARGIN)
+% varargin   command line arguments to ChapterTwo (see VARARGIN)
 
 addpath(genpath('D:\Management\Education+University\Term 5\Numerical Methods\Project Git 2\MatlabConquerors'));
 set(handles.info, 'String','The bisection method in mathematics is a root-finding method which repeatedly bisects an interval and then selects a subinterval in which a root must lie for further processing. It is a very simple and robust method, but it is also relatively slow. Because of this, it is often used to obtain a rough approximation to a solution which is then used as a starting point for more rapidly converging methods.');
 set(handles.equations , 'Data', repmat({''},0,1));
 set(handles.mahdude , 'Data', zeros(0,1));
 
-
-ha = axes('units','normalized', ...
-'position',[0 0 1 1]);
-uistack(ha,'bottom');
-I=imread('back2.jpg');
-imagesc(I)
-colormap gray
-set(ha,'handlevisibility','off', ...
-'visible','off')
 
 [a,map]=imread('adivb.png');
 [r,c,d]=size(a); 
@@ -84,19 +75,18 @@ g(g==255)=5.5*255;
 set(handles.abtb,'CData',g);
 
 
-
-% Choose default command line output for ChapterTow
+% Choose default command line output for ChapterTwo
 handles.output = hObject;
 
 % Update handles structure
 guidata(hObject, handles);
 
-% UIWAIT makes ChapterTow wait for user response (see UIRESUME)
+% UIWAIT makes ChapterTwo wait for user response (see UIRESUME)
 % uiwait(handles.figure1);
 
 
 % --- Outputs from this function are returned to the command line.
-function varargout = ChapterTow_OutputFcn(hObject, eventdata, handles) 
+function varargout = ChapterTwo_OutputFcn(hObject, eventdata, handles) 
 % varargout  cell array for returning output args (see VARARGOUT);
 % hObject    handle to figure
 % eventdata  reserved - to be defined in a future version of MATLAB
@@ -121,9 +111,9 @@ FuncString = strcat('$$',FuncString,'$$');
 text1 = text('Interpreter','latex','String',FuncString);
 set(text1,'FontName','Courier New','FontSize',20);
 
-% --- Executes on button press in pushbutton1.
-function pushbutton1_Callback(hObject, eventdata, handles)
-% hObject    handle to pushbutton1 (see GCBO)
+% --- Executes on button press in back.
+function back_Callback(hObject, eventdata, handles)
+% hObject    handle to back (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 close(ChapterTwo);
@@ -167,7 +157,7 @@ sigfig = get(handles.sigfig, 'String');sigfig=str2double(sigfig);
 delta = get(handles.delta, 'String');delta=str2double(delta);
 
 
-intervals = interval_of_roots(func,a,b,delta);
+intervals = interval_of_roots(func,a,b,delta)
 root_num = size(intervals,1);
 if(root_num == 0)
     set(handles.message_box, 'String','Are you watching closely?!');
@@ -444,3 +434,107 @@ function func_KeyPressFcn(hObject, eventdata, handles)
 %	Character: character interpretation of the key(s) that was pressed
 %	Modifier: name(s) of the modifier key(s) (i.e., control, shift) pressed
 % handles    structure with handles and user data (see GUIDATA)
+
+
+% --- Executes during object creation, after setting all properties.
+function func_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to func (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    empty - handles not created until after all CreateFcns called
+
+% Hint: edit controls usually have a white background on Windows.
+%       See ISPC and COMPUTER.
+if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
+    set(hObject,'BackgroundColor','white');
+end
+
+
+
+function a_Callback(hObject, eventdata, handles)
+% hObject    handle to a (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+% Hints: get(hObject,'String') returns contents of a as text
+%        str2double(get(hObject,'String')) returns contents of a as a double
+
+
+% --- Executes during object creation, after setting all properties.
+function a_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to a (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    empty - handles not created until after all CreateFcns called
+
+% Hint: edit controls usually have a white background on Windows.
+%       See ISPC and COMPUTER.
+if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
+    set(hObject,'BackgroundColor','white');
+end
+
+
+% --- Executes during object creation, after setting all properties.
+function b_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to b (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    empty - handles not created until after all CreateFcns called
+
+% Hint: edit controls usually have a white background on Windows.
+%       See ISPC and COMPUTER.
+if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
+    set(hObject,'BackgroundColor','white');
+end
+
+
+
+function tol_Callback(hObject, eventdata, handles)
+% hObject    handle to tol (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+% Hints: get(hObject,'String') returns contents of tol as text
+%        str2double(get(hObject,'String')) returns contents of tol as a double
+
+
+% --- Executes during object creation, after setting all properties.
+function tol_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to tol (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    empty - handles not created until after all CreateFcns called
+
+% Hint: edit controls usually have a white background on Windows.
+%       See ISPC and COMPUTER.
+if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
+    set(hObject,'BackgroundColor','white');
+end
+
+
+
+function max_step_Callback(hObject, eventdata, handles)
+% hObject    handle to max_step (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+% Hints: get(hObject,'String') returns contents of max_step as text
+%        str2double(get(hObject,'String')) returns contents of max_step as a double
+
+
+% --- Executes during object creation, after setting all properties.
+function max_step_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to max_step (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    empty - handles not created until after all CreateFcns called
+
+% Hint: edit controls usually have a white background on Windows.
+%       See ISPC and COMPUTER.
+if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
+    set(hObject,'BackgroundColor','white');
+end
+
+
+% --- Executes on button press in ignore.
+function ignore_Callback(hObject, eventdata, handles)
+% hObject    handle to ignore (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+% Hint: get(hObject,'Value') returns toggle state of ignore

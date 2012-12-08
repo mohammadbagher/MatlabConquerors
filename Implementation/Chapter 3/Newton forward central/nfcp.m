@@ -39,25 +39,8 @@ prod=1;
 x_ans=y_req;
 plot(axes,x_req,y_req,'+');hold on;
 
-x_sample=x(1):h/10:x(n);
-for k=2:length(x_sample)
-x_req=x_sample(k);
-r =(x_req-x(floor(n/2)))/h; 
-y_req=y(floor(n/2));
-prod=1;
- for j=0:n-2
-     prod=prod*((r+(-1)^(j)*floor((j+1)/2))/(j+1));
-     y_req=y_req+prod*DD(ceil((n-j+1)/2),j+3);
- end
 
-
-plot(axes,x_req,y_req,'--');
-end
-
-for i = 1:n
-
- plot(axes,x(i),y(i),'or');
-end
+ plot(axes,x,y,'or');
 %%%%%%%%%%func
 x_req=sym('x');
 r =sym((x_req-x(floor(n/2)))/h); 
@@ -68,6 +51,11 @@ prod=sym(1);
      y_req=y_req+prod*DD(ceil((n-j+1)/2),j+3);
  end
 func=expand(y_req);
+x=min(x):.1:max(x);
+ plot(x,eval(func));
+ hleg1 = legend('requestpoint','firstpoints','newtonforwardcentralinterpolation');
+ xlabel('points');
+ylabel('approximations');
 
 end
 

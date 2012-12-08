@@ -3,7 +3,7 @@ function intervals = interval_of_roots(func, a, b, delta )
 %that finds subintervals with one root in them.
 %   Detailed explanation goes here
 format long;
-n = ceil((b-a)/delta)-1
+n = ceil((b-a)/delta)-1;
 intervals = zeros(0);
 for i=1:n
     s = a+(i-1)*delta;
