@@ -58,6 +58,14 @@ set(handles.equations , 'Data', repmat({''},0,1));
 set(handles.mahdude , 'Data', zeros(0,1));
 
 
+ha = axes('units','normalized', ...
+'position',[0 0 1 1]);
+uistack(ha,'bottom');
+I=imread('back2.jpg');
+imagesc(I)
+colormap gray
+set(ha,'handlevisibility','off', ...
+'visible','off')
 
 [a,map]=imread('adivb.png');
 [r,c,d]=size(a); 

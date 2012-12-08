@@ -218,7 +218,7 @@ function uitable1_CellEditCallback(hObject, eventdata, handles)
 %	NewData: EditData or its converted form set on the Data property. Empty if Data was not changed
 %	Error: error string when failed to convert EditData to appropriate value for Data
 % handles    structure with handles and user data (see GUIDATA)
-
+cla(handles.axes1);
 data=get(handles.uitable1,'Data');
     c=size(data,1);
     XY=get(handles.uitable1,'Data');
@@ -254,16 +254,18 @@ data=get(handles.uitable1,'Data');
 x_req=get(handles.edit4,'string');
 x_req=str2num(x_req);
 curvfitting=(get(handles.togglebutton1,'Value'));
-if (curvfitting) % Curfitting
-    
+if (curvfitting)
     x=get(handles.uipanel4,'SelectedObject');
     xtag = get(x, 'Tag');
-    if strcmp(xtag,'radioalhpaabetax')
-        a=Curvfitting(handles.axes1,sendindX,sendingY);
-        a(2);
-        plot([min(sendingX):.1:max(sending)])
+    cla(handles.axes1);
+    if strcmp(xtag,'radioalphaabetax')
+        [a b c d e f g]=bestCurvefitting(handles.axes1,sendingX,sendingY);
+        x=min(sendingX):.1:max(sendingX);
+        plot(handles.axes1,x,eval(b),'red');
     elseif strcmp(xtag,'radioalnx')
-        Curvfitting(2);
+        [a b c d e f g]=bestCurvefitting(handles.axes1,sendingX,sendingY);
+        x=min(sendingX):.1:max(sendingX);
+        plot(handles.axes1,x,eval(b),'red');
     elseif strcmp(xtag,'radioaxb')
         Curvfitting(3);
     elseif strcmp(xtag,'radiooaxb')

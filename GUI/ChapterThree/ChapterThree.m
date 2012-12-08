@@ -123,6 +123,34 @@ cla(ax);
 set(handles.axes2,'visible','off');
 text1=text(0, 0, FuncString, 'Parent', ax);
 set(text1,'FontName','Courier New','FontSize',15);
+FuncString=FuncString(6:end);
+[sendingX sendingY]=samplePoint(FuncString);
+x=get(handles.uipanel4,'SelectedObject');
+    xtag = get(x, 'Tag');
+    cla(handles.axes1);
+    if strcmp(xtag,'radioalphaabetax')
+        [a b c d e f g]=bestCurvefitting(handles.axes1,sendingX,sendingY);
+        x=min(sendingX):.1:max(sendingX);
+        plot(handles.axes1,x,eval(b),'red');
+    elseif strcmp(xtag,'radioalnx')
+        [a b c d e f g]=bestCurvefitting(handles.axes1,sendingX,sendingY);
+        x=min(sendingX):.1:max(sendingX);
+        plot(handles.axes1,x,eval(c),'red');
+    elseif strcmp(xtag,'radioaxb')
+        [a b c d e f g]=bestCurvefitting(handles.axes1,sendingX,sendingY);
+        x=min(sendingX):.1:max(sendingX);
+        plot(handles.axes1,x,eval(d),'red');
+    elseif strcmp(xtag,'radiooaxb')
+        [a b c d e f g]=bestCurvefitting(handles.axes1,sendingX,sendingY);
+        x=min(sendingX):.1:max(sendingX);
+        plot(handles.axes1,x,eval(e),'red');
+    elseif strcmp(xtag,'radioaixi')
+        [a b c d e f g]=bestCurvefitting(handles.axes1,sendingX,sendingY);
+        x=min(sendingX):.1:max(sendingX);
+        plot(handles.axes1,x,eval(f),'red');
+        x=min(sendingX):.1:max(sendingX);
+        plot(handles.axes1,x,eval(g),'black');
+    end
 
 % --- Executes during object creation, after setting all properties.
 function edit2_CreateFcn(hObject, eventdata, handles)
@@ -254,23 +282,32 @@ data=get(handles.uitable1,'Data');
 x_req=get(handles.edit4,'string');
 x_req=str2num(x_req);
 curvfitting=(get(handles.togglebutton1,'Value'));
-if (curvfitting) % Curfitting
-    
+if (curvfitting)
     x=get(handles.uipanel4,'SelectedObject');
     xtag = get(x, 'Tag');
     cla(handles.axes1);
     if strcmp(xtag,'radioalphaabetax')
-        a=bestCurvefitting(handles.axes1,sendingX,sendingY);
-        a(2)
-        plot(handles.axes1,min(sendingX):.1:max(sendingX),eval(a(2)));
+        [a b c d e f g]=bestCurvefitting(handles.axes1,sendingX,sendingY);
+        x=min(sendingX):.1:max(sendingX);
+        plot(handles.axes1,x,eval(b),'red');
     elseif strcmp(xtag,'radioalnx')
-        Curvfitting(2);
+        [a b c d e f g]=bestCurvefitting(handles.axes1,sendingX,sendingY);
+        x=min(sendingX):.1:max(sendingX);
+        plot(handles.axes1,x,eval(c),'red');
     elseif strcmp(xtag,'radioaxb')
-        Curvfitting(3);
+        [a b c d e f g]=bestCurvefitting(handles.axes1,sendingX,sendingY);
+        x=min(sendingX):.1:max(sendingX);
+        plot(handles.axes1,x,eval(d),'red');
     elseif strcmp(xtag,'radiooaxb')
-        Curvfitting(4);
+        [a b c d e f g]=bestCurvefitting(handles.axes1,sendingX,sendingY);
+        x=min(sendingX):.1:max(sendingX);
+        plot(handles.axes1,x,eval(e),'red');
     elseif strcmp(xtag,'radioaixi')
-        Curvfitting(5);
+        [a b c d e f g]=bestCurvefitting(handles.axes1,sendingX,sendingY);
+        x=min(sendingX):.1:max(sendingX);
+        plot(handles.axes1,x,eval(f),'red');
+        x=min(sendingX):.1:max(sendingX);
+        plot(handles.axes1,x,eval(g),'black');
     end
 else
     x=get(handles.uipanel7,'SelectedObject');
