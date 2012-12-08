@@ -65,10 +65,11 @@ plot(axes,x_eval,y_eval); hold on;
 
 % plot points used
 
-for i = 1:n
 
- plot(axes,x(i),y(i),'or');
-end
+ plot(axes,x,y,'or');
+ hleg1 = legend('requestpoint','firstpoints','newtondevideddiffrencesinterpolation');
+ xlabel('points');
+ylabel('approximations');
 
 end
 

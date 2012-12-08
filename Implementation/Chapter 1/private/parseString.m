@@ -135,13 +135,34 @@ function result = parse_a()
     if(match('('))
         result = parse_e();
         if(~match(')'))
-            sprintf('error in the input. no matched close parentheses.')
+            sprintf('error in the input. no matched close parenthese.')
         end
+        result{1} = ['(' result{1} ')'];
+    elseif(match('{'))
+        result = parse_e();
+        if(~match('}'))
+            sprintf('error in the input. no matched close bracket.')
+        end
+        result{1} = ['(' result{1} ')'];
+    elseif (match('\'))
+        char(get_token());  % read \frac word to /dev/null
+        soorat = parse_a();
+        makhraj = parse_a();
+        
+        name = [soorat{1} ' / ' makhraj{1}];
+        value = soorat{2} / makhraj{2};
+        abs_error = soorat{2} * makhraj{3} + makhraj{2} * soorat{3};
+        abs_error = abs_error / makhraj{2} ^ 2;
+        rel_error = abs_error / value;
+        if(~isempty(soorat{1}))
+            addStep(name, value, abs_error, rel_error);
+        end
+        result = {name, value, abs_error, rel_error};
     elseif (match_identifier())
         name = char(get_token());
         if(findvars)
             variables(name) = '0';
-            result = {'var', randi([1, 10000]) + 100, 0, 0};
+            result = {name, randi([1, 10000]) + 100, 0, 0};
         else
             addStep(name, values(name), absErrors(name), relErrors(name));
             result = {name, values(name), absErrors(name), relErrors(name)};
