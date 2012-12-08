@@ -162,7 +162,7 @@ function result = parse_a()
         name = char(get_token());
         if(findvars)
             variables(name) = '0';
-            result = {'var', randi([1, 10000]) + 100, 0, 0};
+            result = {name, randi([1, 10000]) + 100, 0, 0};
         else
             addStep(name, values(name), absErrors(name), relErrors(name));
             result = {name, values(name), absErrors(name), relErrors(name)};
