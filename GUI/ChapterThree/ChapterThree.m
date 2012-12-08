@@ -149,6 +149,7 @@ if value
     set(handles.uipanel7,'visible','off');
     set(handles.uipanel8,'Title','Fitted Function');
     set(hObject,'string','Change To Interpolation Mode');
+    set(handles.uipanel9,'visible','off');
     set(handles.togglebutton2,'enable','on');
     set(handles.uipanel4,'visible','on');
     value2=get(handles.togglebutton2,'Value');
@@ -162,10 +163,11 @@ if value
         set(handles.uipanel5,'visible','off');
     end
 else
+    set(handles.uipanel9,'visible','on');
     set(handles.uipanel8,'Title','Interpolated Function');
     set(handles.uitable1,'visible','on');
     set(handles.edit2,'visible','off');
-    set(handles.uipanel5,'visible','off');    
+    set(handles.uipanel5,'visible','off');
     set(handles.uipanel7,'visible','on');
     set(hObject,'string','Change To Curvfitting Mode');
     set(handles.uipanel4,'visible','off');
@@ -206,48 +208,7 @@ function uitable1_CellEditCallback(hObject, eventdata, handles)
 %	Error: error string when failed to convert EditData to appropriate value for Data
 % handles    structure with handles and user data (see GUIDATA)
 
-
-% curvfitting=(get(handles.togglebutton1,'Value'));
-% if (curvfitting) % Curfitting
-%     x=get(handles.uipanel4,'SelectedObject');
-%     xtag = get(x, 'Tag');
-%     if strcmp(xtag,'radioalhpaabetax')
-%         Curvfitting(1);
-%     elseif strcmp(xtag,'radioalnx')
-%         Curvfitting(2);
-%     elseif strcmp(xtag,'radioaxb')
-%         Curvfitting(3);
-%     elseif strcmp(xtag,'radiooaxb')
-%         Curvfitting(4);
-%     elseif strcmp(xtag,'radioaixi')
-%         Curvfitting(5);
-%     end
-% else
-%     x=get(handles.uipanel7,'SelectedObject');
-%     xtag = get(x, 'Tag');
-%     if strcmp(xtag,'radiologrange')
-%         Interpolate(1);
-%     elseif strcmp(xtag,'radioNDD')
-%         Interpolate(2);
-%     elseif strcmp(xtag,'radioNF')
-%         Interpolate(3);
-%     elseif strcmp(xtag,'radioNB')
-%         Interpolate(4);
-%     elseif strcmp(xtag,'radioNFC')
-%         Interpolate(5);
-%     elseif strcmp(xtag,'radioNBC')
-%         Interpolate(6);
-%     end  
-% end
-
-% ax=handles.axes2;
-% FuncString=get(handles.edit2,'string');
-% cla(ax);
-% text(0.5, 0.5, FuncString, 'Parent', ax);
-
-%s=get(handles.pointnotxt,'String');
-%        n=str2double(s);
-    data=get(handles.uitable1,'Data');
+data=get(handles.uitable1,'Data');
     c=size(data,1);
     XY=get(handles.uitable1,'Data');
     X=XY(:,1);
@@ -279,6 +240,50 @@ function uitable1_CellEditCallback(hObject, eventdata, handles)
         data(size(data,1),2)=b(1);
         set(handles.uitable1,'Data',data);
     end
+x_req=get(handles.edit4,'string');
+x_req=str2num(x_req);
+curvfitting=(get(handles.togglebutton1,'Value'));
+if (curvfitting) % Curfitting
+    
+    x=get(handles.uipanel4,'SelectedObject');
+    xtag = get(x, 'Tag');
+    if strcmp(xtag,'radioalhpaabetax')
+        Curvfitting(1);
+    elseif strcmp(xtag,'radioalnx')
+        Curvfitting(2);
+    elseif strcmp(xtag,'radioaxb')
+        Curvfitting(3);
+    elseif strcmp(xtag,'radiooaxb')
+        Curvfitting(4);
+    elseif strcmp(xtag,'radioaixi')
+        Curvfitting(5);
+    end
+else
+    x=get(handles.uipanel7,'SelectedObject');
+    xtag = get(x, 'Tag');
+    if strcmp(xtag,'radiologrange')
+        lagrange_interpolation(sendingX,sendingY,x_req,handles.axes1);
+    elseif strcmp(xtag,'radioNDD')
+        newtondevideddiffrencec(sendingX,sendingY,x_req,handles.axes1);
+    elseif strcmp(xtag,'radioNF')
+        nfwp(sendingX,sendingY,x_req,handles.axes1);
+    elseif strcmp(xtag,'radioNB')
+        nbwp(sendingX,sendingY,x_req,handles.axes1);
+    elseif strcmp(xtag,'radioNFC')
+        nfcp(sendingX,sendingY,x_req,handles.axes1);
+    elseif strcmp(xtag,'radioNBC')
+        nbcp(sendingX,sendingY,x_req,handles.axes1);
+    end
+end
+
+% ax=handles.axes2;
+% FuncString=get(handles.edit2,'string');
+% cla(ax);
+% text(0.5, 0.5, FuncString, 'Parent', ax);
+
+%s=get(handles.pointnotxt,'String');
+%        n=str2double(s);
+    
     
 %     X2
 %     Y2
