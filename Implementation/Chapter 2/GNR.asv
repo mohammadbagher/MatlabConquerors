@@ -1,4 +1,4 @@
-function result = GNR( funcs , X , step )
+function result = GNR( funcs , X , max_step,tol )
 %GNR generalized newton-raphson method for solving a system of 
 %       non-linear equations.
 %       
@@ -28,7 +28,7 @@ for i=1:n
 end
 
 approx= X;
-for i=1:step
+for i=1:max_step
     for j=1:n
         dumb(:,:)=Dizi(:,:,j);
         comb=D;

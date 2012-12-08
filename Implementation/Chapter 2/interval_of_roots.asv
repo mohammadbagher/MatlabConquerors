@@ -10,14 +10,17 @@ for i=1:n
     e = a+i*delta;
     fs=feval(func,s);
     fe=feval(func,e);
-    t = size(intervals,1);
-    if(t>1 && fs == 0.0 && intervals(end-1,1) == max(s-delta,a) && intervals(end-1,1) == e)
+    if(fs == 0.0)
+        
+        t = size(intervals,1);
         intervals(t+1,1) = max(s-delta,a);
         intervals(t+1,2) = e;
     else if(fe == 0.0)
+        t = size(intervals,1);
         intervals(t+1,1) = s;
         intervals(t+1,2) = min(e+delta,b);
     else if(fs*fe< 0.0)
+        t = size(intervals,1);
         intervals(t+1,1) = s;
         intervals(t+1,2) = e; 
         end
@@ -26,12 +29,10 @@ for i=1:n
 end
 s = a+n*delta;
 e=b;
-fs=feval(func,s);
-fe=feval(func,e);
-t = size(intervals,1);
-
-if(fs*fe< 0.0)
+if(feval(func,s)*feval(func,e)<= 0.0)
+    t = size(intervals,1);
     intervals(t+1,1) = s;
     intervals(t+1,2) = e; 
 end
+
 end
