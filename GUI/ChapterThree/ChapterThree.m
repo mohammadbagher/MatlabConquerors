@@ -75,6 +75,17 @@ function ChapterThree_OpeningFcn(hObject, eventdata, handles, varargin)
     rgb = imread('aixi.png');
     axes(handles.aixi);
     imshow(rgb);
+    
+    
+    ha = axes('units','normalized', ...
+'position',[0 0 1 1]);
+uistack(ha,'bottom');
+I=imread('back2.jpg');
+imagesc(I)
+colormap gray
+set(ha,'handlevisibility','off', ...
+'visible','off')
+
 
 % Choose default command line output for ChapterThree
 handles.output = hObject;
@@ -234,7 +245,7 @@ data=get(handles.uitable1,'Data');
     end
     sendingX
     sendingY
-    if counter==0
+    if counter==1
         b=repmat({''},1,2);
         data(size(data,1)+1,1)=b(1);
         data(size(data,1),2)=b(1);
@@ -276,39 +287,6 @@ else
     end
 end
 
-% ax=handles.axes2;
-% FuncString=get(handles.edit2,'string');
-% cla(ax);
-% text(0.5, 0.5, FuncString, 'Parent', ax);
-
-%s=get(handles.pointnotxt,'String');
-%        n=str2double(s);
-    
-    
-%     X2
-%     Y2
- %       if(n>0)
-  %          set(handles.pointtbl,'Enable','on');
-   %         if(c~=n)
-    %        d(1,:)=data(1,:);
-     %       for i=2:n
-      %          d(i,:)=data(c,:);
-       %     end
-        %    c=min(c,n);
-         %   for i=2:c
-          %      d(i,:)=data(i,:);
-           % end
-            
-            %set(handles.pointtbl,'Data',d);
-            %end
-        %else
-         %   set(handles.pointtbl,'Enable','off');
-            
-        
-        %end
-%set(,'text','alphaabetax');
-%p=get(hObject,'data')
-%scatter(handles.axes1,p);
 
 
 % --- Executes during object creation, after setting all properties.

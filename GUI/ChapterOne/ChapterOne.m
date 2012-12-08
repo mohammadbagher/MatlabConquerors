@@ -57,8 +57,8 @@ addpath(genpath('G:\Workspace\Matlab\MatlabConquerors'));
 
 [a,map]=imread('adivb.png');
 [r,c,d]=size(a); 
-x=ceil(r/45); 
-y=ceil(c/45); 
+x=ceil(r/40); 
+y=ceil(c/40); 
 g=a(1:x:end,1:y:end,:);
 g(g==255)=5.5*255;
 set(handles.adivb,'CData',g);
@@ -70,6 +70,15 @@ y=ceil(c/40);
 g=a(1:x:end,1:y:end,:);
 g(g==255)=5.5*255;
 set(handles.abtb,'CData',g);
+
+ha = axes('units','normalized', ...
+'position',[0 0 1 1]);
+uistack(ha,'bottom');
+I=imread('back2.jpg');
+imagesc(I)
+colormap gray
+set(ha,'handlevisibility','off', ...
+'visible','off')
 
 
 % Choose default command line output for ChapterOne
