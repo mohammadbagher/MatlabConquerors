@@ -22,7 +22,7 @@ function varargout = ChapterTwo(varargin)
 
 % Edit the above text to modify the response to help ChapterTwo
 
-% Last Modified by GUIDE v2.5 08-Dec-2012 23:59:12
+% Last Modified by GUIDE v2.5 09-Dec-2012 00:27:57
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
@@ -75,7 +75,6 @@ g(g==255)=5.5*255;
 set(handles.abtb,'CData',g);
 
 
-
 % Choose default command line output for ChapterTwo
 handles.output = hObject;
 
@@ -112,9 +111,9 @@ FuncString = strcat('$$',FuncString,'$$');
 text1 = text('Interpreter','latex','String',FuncString);
 set(text1,'FontName','Courier New','FontSize',20);
 
-% --- Executes on button press in pushbutton1.
-function pushbutton1_Callback(hObject, eventdata, handles)
-% hObject    handle to pushbutton1 (see GCBO)
+% --- Executes on button press in back.
+function back_Callback(hObject, eventdata, handles)
+% hObject    handle to back (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 close(ChapterTwo);
@@ -158,7 +157,7 @@ sigfig = get(handles.sigfig, 'String');sigfig=str2double(sigfig);
 delta = get(handles.delta, 'String');delta=str2double(delta);
 
 
-intervals = interval_of_roots(func,a,b,delta);
+intervals = interval_of_roots(func,a,b,delta)
 root_num = size(intervals,1);
 if(root_num == 0)
     set(handles.message_box, 'String','Are you watching closely?!');
