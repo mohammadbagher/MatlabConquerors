@@ -54,7 +54,8 @@ function ChapterTow_OpeningFcn(hObject, eventdata, handles, varargin)
 
 addpath(genpath('D:\Management\Education+University\Term 5\Numerical Methods\Project Git 2\MatlabConquerors'));
 set(handles.info, 'String','The bisection method in mathematics is a root-finding method which repeatedly bisects an interval and then selects a subinterval in which a root must lie for further processing. It is a very simple and robust method, but it is also relatively slow. Because of this, it is often used to obtain a rough approximation to a solution which is then used as a starting point for more rapidly converging methods.');
-set(handles.equations , 'Data', repmat({''},1,1));
+set(handles.equations , 'Data', repmat({''},0,1));
+set(handles.mahdude , 'Data', zeros(0,1));
 
 
 
@@ -108,9 +109,6 @@ ax=handles.axes2;
 FuncString=get(handles.func,'string');
 cla(ax);
 set(handles.axes2,'visible','off');
-%text('Interpreter','latex','String','$$\int_0^x\!\int_y dF(u,v)$$'
-%text1= text('Interpreter','latex','$$\int_0^x\!\int_y dF(u,v)$$');
-%text1=text(0, 0, , 'Parent', );
 FuncString = strcat('$$',FuncString,'$$');
 text1 = text('Interpreter','latex','String',FuncString);
 set(text1,'FontName','Courier New','FontSize',20);
@@ -136,13 +134,27 @@ if(get(handles.ignore, 'Value') ~= 1);
     ChapterTwoAnswer(handles);
 end
 
-
-func = get(handles.func, 'String');func = str2func(func);
 method_code = get(handles.method, 'Value');
+max_step = get(handles.max_step, 'String');max_step=str2double(max_step);
+
+if(method_code == 11)    %generalized-newton-raphson-----------------------
+    equations = get(handles.equations,'Data');
+    mahdude = get(handles.mahdude,'Data')
+    fff = GNR(equations,mahdude,max_step);
+    set(handles.final_solve,'Data',fff);
+    return;
+end
+
+func = get(handles.func, 'String');
+
+index = strfind(func,'=');
+func = func(index+1:end);
+func = strcat('@(x)(',func,')')
+func = str2func(func);
+
 a = get(handles.a, 'String');a=str2double(a);
 b = get(handles.b, 'String');b=str2double(b);
 tol = get(handles.tol, 'String');tol=str2double(tol);
-max_step = get(handles.max_step, 'String');max_step=str2double(max_step);
 sigfig = get(handles.sigfig, 'String');sigfig=str2double(sigfig);
 delta = get(handles.delta, 'String');delta=str2double(delta);
 
@@ -292,9 +304,49 @@ function method_Callback(hObject, eventdata, handles)
 
 % Hints: contents = cellstr(get(hObject,'String')) returns method contents as cell array
 %        contents{get(hObject,'Value')} returns selected item from method
-set(handles.info, 'String','The bisection method in mathematics is a root-finding method which repeatedly bisects an interval and then selects a subinterval in which a root must lie for further processing. It is a very simple and robust method, but it is also relatively slow. Because of this, it is often used to obtain a rough approximation to a solution which is then used as a starting point for more rapidly converging methods.');
-
-
+method_code = get(handles.method, 'Value');
+if(method_code == 11)  %GNR------------------------------------------------
+    set(handles.info, 'String','GNR dscrptn');
+    set(handles.func,'String','f_1=');
+    func_Callback(hObject, eventdata, handles);
+    set(handles.equations,'Visible','on');
+    set(handles.mahdude,'Visible','on');
+    return;
+end
+if(method_code ~= 11)  %not-GNR--------------------------------------------
+    set(handles.equations,'Visible','off');
+    set(handles.mahdude,'Visible','off');
+end
+if(method_code == 1)  %bisection-------------------------------------------
+    set(handles.info, 'String','The bisection method in mathematics is a root-finding method which repeatedly bisects an interval and then selects a subinterval in which a root must lie for further processing. It is a very simple and robust method, but it is also relatively slow. Because of this, it is often used to obtain a rough approximation to a solution which is then used as a starting point for more rapidly converging methods.');
+end
+if(method_code == 2)  %bisection-------------------------------------------
+    set(handles.info, 'String','dscrptn');
+end
+if(method_code == 3)  %bisection-------------------------------------------
+    set(handles.info, 'String','dscrptn');
+end
+if(method_code == 4)  %bisection-------------------------------------------
+    set(handles.info, 'String','dscrptn');
+end
+if(method_code == 5)  %bisection-------------------------------------------
+    set(handles.info, 'String','dscrptn');
+end
+if(method_code == 6)  %bisection-------------------------------------------
+    set(handles.info, 'String','dscrptn');
+end
+if(method_code == 7)  %bisection-------------------------------------------
+    set(handles.info, 'String','dscrptn');
+end
+if(method_code == 8)  %bisection-------------------------------------------
+    set(handles.info, 'String','dscrptn');
+end
+if(method_code == 9)  %bisection-------------------------------------------
+    set(handles.info, 'String','dscrptn');
+end
+if(method_code == 10)  %bisection-------------------------------------------
+    set(handles.info, 'String','dscrptn');
+end
 
 
 % --- Executes during object creation, after setting all properties.
@@ -348,6 +400,23 @@ function pushbutton8_Callback(hObject, eventdata, handles)
 % hObject    handle to pushbutton8 (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
+func_Callback(hObject, eventdata, handles);
+method_code = get(handles.method, 'Value');
+if(method_code == 11)  %GNR------------------------------------------------
+    func = get(handles.func, 'String');
+    index = strfind(func,'=');
+    func = func(index+1:end);
+    if(size(strtrim(func),1)~=0)
+        eqt = get(handles.equations,'Data');
+        mht = get(handles.mahdude,'Data');
+        eqt(size(eqt,1)+1,1) = cellstr(func);
+        mht(size(mht,1)+1,1) = 1;
+        set(handles.equations,'Data',eqt);
+        set(handles.mahdude,'Data',mht);
+        set(handles.func,'String',strcat('f_',num2str(size(eqt,1)+1),'='));
+    end
+end
+
 
 
 % --- Executes during object creation, after setting all properties.
