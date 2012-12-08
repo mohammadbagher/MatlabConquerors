@@ -52,7 +52,7 @@ function FirstPage_OpeningFcn(hObject, eventdata, handles, varargin)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 % varargin   command line arguments to FirstPage (see VARARGIN)
-addpath(genpath('add your path here!!'));
+addpath(genpath('G:\Workspace\Matlab\MatlabConquerors'));
 
 image1 = imread('logo1.png');
 imshow(image1,'Parent',handles.axes1);
