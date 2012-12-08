@@ -79,11 +79,12 @@ ay4=(B1-as4*n)/A1;
 temparr=ones(size(x));
 y5=as4+(ay4*temparr./x);
 error5=MRS(y,y5);
-func3=expand(sym(as4+(ay4*temparr/xfunc)));
+functemp=expand(sym(as4+(ay4*temparr/xfunc)));
+func3=functemp(1);
 if r>error5
     r=error5;
 y_request=y5;
-func=expand(sym(as4+(ay4*temparr/xfunc)));
+func=functemp(1);
 
 end
 %%%%%%%%%%%%%%%%%%

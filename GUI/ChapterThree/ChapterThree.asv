@@ -504,12 +504,3 @@ function addrow_Callback(hObject, eventdata, handles)
 % hObject    handle to addrow (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
-        data=get(handles.uitable1,'data');
-        b=repmat({''},1,2);
-        data(size(data,1)+1,1)=b(1);
-        data(size(data,1),2)=b(1);
-        data(size(data,1)+1,1)=b(1);
-        data(size(data,1),2)=b(1);
-        data(size(data,1)+1,1)=b(1);
-        data(size(data,1),2)=b(1);
-        set(handles.uitable1,'Data',data);
