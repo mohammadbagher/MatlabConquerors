@@ -77,16 +77,6 @@ function ChapterThree_OpeningFcn(hObject, eventdata, handles, varargin)
     imshow(rgb);
     
     
-    ha = axes('units','normalized', ...
-'position',[0 0 1 1]);
-uistack(ha,'bottom');
-I=imread('back2.jpg');
-imagesc(I)
-colormap gray
-set(ha,'handlevisibility','off', ...
-'visible','off')
-
-
 % Choose default command line output for ChapterThree
 handles.output = hObject;
 
@@ -118,13 +108,18 @@ function edit2_Callback(hObject, eventdata, handles)
 %        str2double(get(hObject,'String')) returns contents of edit2 as a double
 
 ax=handles.axes2;
-FuncString=get(handles.edit2,'string');
+FuncString=get(hObject,'string');
+FuncStringNormal=translate(FuncString(6:end));
 cla(ax);
 set(handles.axes2,'visible','off');
-text1=text(0, 0, FuncString, 'Parent', ax);
-set(text1,'FontName','Courier New','FontSize',15);
-FuncString=FuncString(6:end);
-[sendingX sendingY]=samplePoint(FuncString);
+
+laTexFuncString = strcat('$$',FuncString,'$$');
+text1 = text('Interpreter','latex','String',laTexFuncString);
+set(text1,'FontName','Courier New','FontSize',20);
+a=11
+
+%FuncStringNormal=FuncStringNormal(6:end);
+[sendingX sendingY]=samplePoint(FuncStringNormal);
 x=get(handles.uipanel4,'SelectedObject');
     xtag = get(x, 'Tag');
     cla(handles.axes1);
