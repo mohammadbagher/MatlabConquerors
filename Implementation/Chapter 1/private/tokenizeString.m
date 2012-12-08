@@ -18,7 +18,7 @@ function result = tokenizeString(input)
     end
     tokens = {};
     while not(isempty(string))
-        [tokens{end+1},string] = strtok(string, ' \t');
+        [tokens{end+1},string] = strtok(string, ' t');
     end
     result = tokens;
 end
