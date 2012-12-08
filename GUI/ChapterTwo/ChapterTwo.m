@@ -22,7 +22,7 @@ function varargout = ChapterTwo(varargin)
 
 % Edit the above text to modify the response to help ChapterTwo
 
-% Last Modified by GUIDE v2.5 09-Dec-2012 00:27:57
+% Last Modified by GUIDE v2.5 09-Dec-2012 02:44:17
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
@@ -56,7 +56,7 @@ addpath(genpath('D:\Management\Education+University\Term 5\Numerical Methods\Pro
 set(handles.info, 'String','The bisection method in mathematics is a root-finding method which repeatedly bisects an interval and then selects a subinterval in which a root must lie for further processing. It is a very simple and robust method, but it is also relatively slow. Because of this, it is often used to obtain a rough approximation to a solution which is then used as a starting point for more rapidly converging methods.');
 set(handles.equations , 'Data', repmat({''},0,1));
 set(handles.mahdude , 'Data', zeros(0,1));
-
+set(handles.final_solve,'Data',zeros(0,2));
 
 [a,map]=imread('adivb.png');
 [r,c,d]=size(a); 
@@ -111,9 +111,9 @@ FuncString = strcat('$$',FuncString,'$$');
 text1 = text('Interpreter','latex','String',FuncString);
 set(text1,'FontName','Courier New','FontSize',20);
 
-% --- Executes on button press in back.
-function back_Callback(hObject, eventdata, handles)
-% hObject    handle to back (see GCBO)
+% --- Executes on button press in pushbutton1.
+function pushbutton1_Callback(hObject, eventdata, handles)
+% hObject    handle to pushbutton1 (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 close(ChapterTwo);
@@ -126,7 +126,9 @@ function pushbutton4_Callback(hObject, eventdata, handles)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 set(handles.message_box, 'String','Solving...Please Wait!');
-set(handles.final_solve,'Data',zeros(1,2));
+set(handles.final_solve,'Data',zeros(0,2));
+
+
 
 if(get(handles.ignore, 'Value') ~= 1);
     ChapterTwoAnswer(handles);
@@ -140,6 +142,7 @@ if(method_code == 11)    %generalized-newton-raphson-----------------------
     mahdude = get(handles.mahdude,'Data')
     fff = GNR(equations,mahdude,max_step);
     set(handles.final_solve,'Data',fff);
+    set(handles.message_box, 'String','Solved!');
     return;
 end
 
@@ -147,7 +150,7 @@ func = get(handles.func, 'String');
 
 index = strfind(func,'=');
 func = func(index+1:end);
-func = strcat('@(x)(',func,')')
+func = strcat('@(x)(',func,')');
 func = str2func(func);
 
 a = get(handles.a, 'String');a=str2double(a);
@@ -157,7 +160,7 @@ sigfig = get(handles.sigfig, 'String');sigfig=str2double(sigfig);
 delta = get(handles.delta, 'String');delta=str2double(delta);
 
 
-intervals = interval_of_roots(func,a,b,delta)
+intervals = interval_of_roots(func,a,b,delta);
 root_num = size(intervals,1);
 if(root_num == 0)
     set(handles.message_box, 'String','Are you watching closely?!');
@@ -167,45 +170,45 @@ final = zeros(root_num,2);
 if(method_code == 1)    %bisection-----------------------------------------
     for i=1:root_num
         curr_root = bisection(func,intervals(i,1),intervals(i,2),max_step,tol);
-        curr_error = error_calculator(func,curr_root);
-        final(i,1) = curr_root;
-        final(i,2) = curr_error;
+        curr_error = error_calculator(func,curr_root,sigfig);
+        final(i,1) = vpa(curr_root,sigfig);
+        final(i,2) = vpa(curr_error,sigfig);
     end
     set(handles.final_solve,'Data',final);
-    set(handles.message_box, 'String',':D');
-    return;
+    set(handles.message_box, 'String','Solved!');
+  return;
 end
 if(method_code == 2)    %secant--------------------------------------------
     for i=1:root_num
         curr_root = secant(func,intervals(i,1),intervals(i,2),max_step,tol);
-        curr_error = error_calculator(func,curr_root);
-        final(i,1) = curr_root;
-        final(i,2) = curr_error;
+        curr_error = error_calculator(func,curr_root,sigfig);
+        final(i,1) = vpa(curr_root,sigfig);
+        final(i,2) = vpa(curr_error,sigfig);
     end
     set(handles.final_solve,'Data',final);
-    set(handles.message_box, 'String',':D');
+    set(handles.message_box, 'String','Solved!');
     return;
 end
 if(method_code == 3)    %false-position------------------------------------
     for i=1:root_num
         curr_root = false_position(func,intervals(i,1),intervals(i,2),max_step,tol);
-        curr_error = error_calculator(func,curr_root);
-        final(i,1) = curr_root;
-        final(i,2) = curr_error;
+        curr_error = error_calculator(func,curr_root,sigfig);
+        final(i,1) = vpa(curr_root,sigfig);
+        final(i,2) = vpa(curr_error,sigfig);
     end
     set(handles.final_solve,'Data',final);
-    set(handles.message_box, 'String',':D');
+    set(handles.message_box, 'String','Solved!');
     return;
 end
 if(method_code == 4)    %newton-raphson------------------------------------
     for i=1:root_num
         curr_root = NR(func,intervals(i,1),intervals(i,2),tol);
-        curr_error = error_calculator(func,curr_root);
-        final(i,1) = curr_root;
-        final(i,2) = curr_error;
+        curr_error = error_calculator(func,curr_root,sigfig);
+        final(i,1) = vpa(curr_root,sigfig);
+        final(i,2) = vpa(curr_error,sigfig);
     end
     set(handles.final_solve,'Data',final);
-    set(handles.message_box, 'String',':D');
+    set(handles.message_box, 'String','Solved!');
     return;
 end
 set(handles.message_box, 'String','The method isn''t implemented yet.');
@@ -311,6 +314,18 @@ if(method_code == 11)  %GNR------------------------------------------------
     set(handles.mahdude,'Visible','on');
     return;
 end
+% Bisection
+% Secant 
+% False Position
+% Newton Raphson
+% Fixed Point
+% Riddler
+% Muller
+% Broyden
+% Brent
+% Chebyshev
+% Generalized Newton Raphson
+
 if(method_code ~= 11)  %not-GNR--------------------------------------------
     set(handles.equations,'Visible','off');
     set(handles.mahdude,'Visible','off');
@@ -538,3 +553,11 @@ function ignore_Callback(hObject, eventdata, handles)
 % handles    structure with handles and user data (see GUIDATA)
 
 % Hint: get(hObject,'Value') returns toggle state of ignore
+
+
+% --- Executes when selected cell(s) is changed in final_solve.
+function final_solve_CellSelectionCallback(hObject, eventdata, handles)
+% hObject    handle to final_solve (see GCBO)
+% eventdata  structure with the following fields (see UITABLE)
+%	Indices: row and column indices of the cell(s) currently selecteds
+% handles    structure with handles and user data (see GUIDATA)

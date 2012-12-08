@@ -1,4 +1,4 @@
-function result = GNR( F , X , max_step )
+function result = GNR( F , X , max_step ,mantissa)
 %UNTITLED2 Summary of this function goes here
 %   Detailed explanation goes here
 format long;
@@ -59,7 +59,7 @@ for i=1:max_step
     end
 end
 for i=1:n
-    result(i,1)=approx(1,i);
+    result(i,1)=vpa(approx(1,i),mantissa);
 end
 
 end
