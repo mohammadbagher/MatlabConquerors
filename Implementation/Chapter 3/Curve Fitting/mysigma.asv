@@ -10,7 +10,7 @@ for i=1:length(y)
 end
 A2=0;
 for i=1:length(x)
-    A2=A2+x(i)^2;
+    A2=A2+x(i)*x(i);
 end
 B2=0;
 for i=1:length(x)
@@ -18,15 +18,15 @@ for i=1:length(x)
 end
 A3=0;
 for i=1:length(x)
-    A3=A3+x(i)^3;
+    A3=A3+x(i)*x(i)*x(i);
 end
 A4=0;
 for i=1:length(x)
-    A4=A4+x(i)^4;
+    A4=A4+x(i)*x(i)*x(i)*x(i);
 end
 B3=0;
 for i=1:length(x)
-    B3=B3+x(i)^2*y(i);
+    B3=B3+x(i)*x(i)*y(i);
 end
 
 end
