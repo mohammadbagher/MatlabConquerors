@@ -22,7 +22,7 @@ function varargout = ChapterThree(varargin)
 
 % Edit the above text to modify the response to help ChapterThree
 
-% Last Modified by GUIDE v2.5 05-Dec-2012 02:47:54
+% Last Modified by GUIDE v2.5 08-Dec-2012 10:54:49
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
@@ -123,6 +123,34 @@ cla(ax);
 set(handles.axes2,'visible','off');
 text1=text(0, 0, FuncString, 'Parent', ax);
 set(text1,'FontName','Courier New','FontSize',15);
+FuncString=FuncString(6:end);
+[sendingX sendingY]=samplePoint(FuncString);
+x=get(handles.uipanel4,'SelectedObject');
+    xtag = get(x, 'Tag');
+    cla(handles.axes1);
+    if strcmp(xtag,'radioalphaabetax')
+        [a b c d e f g]=bestCurvefitting(handles.axes1,sendingX,sendingY);
+        x=min(sendingX):.1:max(sendingX);
+        plot(handles.axes1,x,eval(b),'red');
+    elseif strcmp(xtag,'radioalnx')
+        [a b c d e f g]=bestCurvefitting(handles.axes1,sendingX,sendingY);
+        x=min(sendingX):.1:max(sendingX);
+        plot(handles.axes1,x,eval(c),'red');
+    elseif strcmp(xtag,'radioaxb')
+        [a b c d e f g]=bestCurvefitting(handles.axes1,sendingX,sendingY);
+        x=min(sendingX):.1:max(sendingX);
+        plot(handles.axes1,x,eval(d),'red');
+    elseif strcmp(xtag,'radiooaxb')
+        [a b c d e f g]=bestCurvefitting(handles.axes1,sendingX,sendingY);
+        x=min(sendingX):.1:max(sendingX);
+        plot(handles.axes1,x,eval(e),'red');
+    elseif strcmp(xtag,'radioaixi')
+        [a b c d e f g]=bestCurvefitting(handles.axes1,sendingX,sendingY);
+        x=min(sendingX):.1:max(sendingX);
+        plot(handles.axes1,x,eval(f),'red');
+        x=min(sendingX):.1:max(sendingX);
+        plot(handles.axes1,x,eval(g),'black');
+    end
 
 % --- Executes during object creation, after setting all properties.
 function edit2_CreateFcn(hObject, eventdata, handles)
@@ -218,7 +246,7 @@ function uitable1_CellEditCallback(hObject, eventdata, handles)
 %	NewData: EditData or its converted form set on the Data property. Empty if Data was not changed
 %	Error: error string when failed to convert EditData to appropriate value for Data
 % handles    structure with handles and user data (see GUIDATA)
-
+cla(handles.axes1);
 data=get(handles.uitable1,'Data');
     c=size(data,1);
     XY=get(handles.uitable1,'Data');
@@ -254,20 +282,32 @@ data=get(handles.uitable1,'Data');
 x_req=get(handles.edit4,'string');
 x_req=str2num(x_req);
 curvfitting=(get(handles.togglebutton1,'Value'));
-if (curvfitting) % Curfitting
-    
+if (curvfitting)
     x=get(handles.uipanel4,'SelectedObject');
     xtag = get(x, 'Tag');
-    if strcmp(xtag,'radioalhpaabetax')
-        Curvfitting(1);
+    cla(handles.axes1);
+    if strcmp(xtag,'radioalphaabetax')
+        [a b c d e f g]=bestCurvefitting(handles.axes1,sendingX,sendingY);
+        x=min(sendingX):.1:max(sendingX);
+        plot(handles.axes1,x,eval(b),'red');
     elseif strcmp(xtag,'radioalnx')
-        Curvfitting(2);
+        [a b c d e f g]=bestCurvefitting(handles.axes1,sendingX,sendingY);
+        x=min(sendingX):.1:max(sendingX);
+        plot(handles.axes1,x,eval(c),'red');
     elseif strcmp(xtag,'radioaxb')
-        Curvfitting(3);
+        [a b c d e f g]=bestCurvefitting(handles.axes1,sendingX,sendingY);
+        x=min(sendingX):.1:max(sendingX);
+        plot(handles.axes1,x,eval(d),'red');
     elseif strcmp(xtag,'radiooaxb')
-        Curvfitting(4);
+        [a b c d e f g]=bestCurvefitting(handles.axes1,sendingX,sendingY);
+        x=min(sendingX):.1:max(sendingX);
+        plot(handles.axes1,x,eval(e),'red');
     elseif strcmp(xtag,'radioaixi')
-        Curvfitting(5);
+        [a b c d e f g]=bestCurvefitting(handles.axes1,sendingX,sendingY);
+        x=min(sendingX):.1:max(sendingX);
+        plot(handles.axes1,x,eval(f),'red');
+        x=min(sendingX):.1:max(sendingX);
+        plot(handles.axes1,x,eval(g),'black');
     end
 else
     x=get(handles.uipanel7,'SelectedObject');
@@ -355,3 +395,15 @@ function edit4_CreateFcn(hObject, eventdata, handles)
 if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
     set(hObject,'BackgroundColor','white');
 end
+
+
+% --- Executes when entered data in editable cell(s) in uitable4.
+function uitable4_CellEditCallback(hObject, eventdata, handles)
+% hObject    handle to uitable4 (see GCBO)
+% eventdata  structure with the following fields (see UITABLE)
+%	Indices: row and column indices of the cell(s) edited
+%	PreviousData: previous data for the cell(s) edited
+%	EditData: string(s) entered by the user
+%	NewData: EditData or its converted form set on the Data property. Empty if Data was not changed
+%	Error: error string when failed to convert EditData to appropriate value for Data
+% handles    structure with handles and user data (see GUIDATA)
