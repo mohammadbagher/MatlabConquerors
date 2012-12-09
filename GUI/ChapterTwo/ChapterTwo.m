@@ -22,7 +22,7 @@ function varargout = ChapterTwo(varargin)
 
 % Edit the above text to modify the response to help ChapterTwo
 
-% Last Modified by GUIDE v2.5 09-Dec-2012 00:27:57
+% Last Modified by GUIDE v2.5 09-Dec-2012 07:21:16
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
@@ -56,7 +56,7 @@ addpath(genpath('D:\Management\Education+University\Term 5\Numerical Methods\Pro
 set(handles.info, 'String','The bisection method in mathematics is a root-finding method which repeatedly bisects an interval and then selects a subinterval in which a root must lie for further processing. It is a very simple and robust method, but it is also relatively slow. Because of this, it is often used to obtain a rough approximation to a solution which is then used as a starting point for more rapidly converging methods.');
 set(handles.equations , 'Data', repmat({''},0,1));
 set(handles.mahdude , 'Data', zeros(0,1));
-
+set(handles.final_solve,'Data',repmat({''},0,4));
 
 [a,map]=imread('adivb.png');
 [r,c,d]=size(a); 
@@ -107,39 +107,44 @@ ax=handles.axes2;
 FuncString=get(handles.func,'string');
 cla(ax);
 set(handles.axes2,'visible','off');
-FuncString = strcat('$$',FuncString,'$$');
+FuncString = strcat(' $$  ',FuncString,'$$');
 text1 = text('Interpreter','latex','String',FuncString);
 set(text1,'FontName','Courier New','FontSize',20);
 
-% --- Executes on button press in back.
-function back_Callback(hObject, eventdata, handles)
-% hObject    handle to back (see GCBO)
+% --- Executes on button press in pushbutton1.
+function pushbutton1_Callback(hObject, eventdata, handles)
+% hObject    handle to pushbutton1 (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 close(ChapterTwo);
 FirstPage();
 
 
-% --- Executes on button press in pushbutton4.
-function pushbutton4_Callback(hObject, eventdata, handles)
-% hObject    handle to pushbutton4 (see GCBO)
+% --- Executes on button press in solve_button.
+function solve_button_Callback(hObject, eventdata, handles)
+% hObject    handle to solve_button (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 set(handles.message_box, 'String','Solving...Please Wait!');
-set(handles.final_solve,'Data',zeros(1,2));
 
-if(get(handles.ignore, 'Value') ~= 1);
-    ChapterTwoAnswer(handles);
-end
+
+
 
 method_code = get(handles.method, 'Value');
 max_step = get(handles.max_step, 'String');max_step=str2double(max_step);
+sigfig = get(handles.sigfig, 'String');sigfig=str2double(sigfig);
 
 if(method_code == 11)    %generalized-newton-raphson-----------------------
     equations = get(handles.equations,'Data');
-    mahdude = get(handles.mahdude,'Data')
-    fff = GNR(equations,mahdude,max_step);
+    if(size(equations,1) < 2 )
+        set(handles.message_box,'String','I don''t see a system of equations!');
+        return;
+    end
+    mahdude = get(handles.mahdude,'Data');
+    fff = zeros(1,4);
+    fff(:,2:3) = GNR(equations,mahdude,max_step,sigfig);
     set(handles.final_solve,'Data',fff);
+    set(handles.message_box, 'String','Solved!');
     return;
 end
 
@@ -147,65 +152,94 @@ func = get(handles.func, 'String');
 
 index = strfind(func,'=');
 func = func(index+1:end);
-func = strcat('@(x)(',func,')')
+if(size(strtrim(func),1)==0)
+    set(handles.message_box,'String','Please enter a function!');
+    return;
+end
+func = strcat('@(x)(',func,')');
 func = str2func(func);
 
 a = get(handles.a, 'String');a=str2double(a);
 b = get(handles.b, 'String');b=str2double(b);
 tol = get(handles.tol, 'String');tol=str2double(tol);
-sigfig = get(handles.sigfig, 'String');sigfig=str2double(sigfig);
 delta = get(handles.delta, 'String');delta=str2double(delta);
 
 
-intervals = interval_of_roots(func,a,b,delta)
+intervals = interval_of_roots(func,a,b,delta);
 root_num = size(intervals,1);
 if(root_num == 0)
-    set(handles.message_box, 'String','Are you watching closely?!');
+    set(handles.message_box, 'String','No roots found in your interval! Try another interval that contains a root or if you''r sure that there is a root, try mifying the Delta');
     return;
 end
-final = zeros(root_num,2);
+final = repmat({''},root_num,4);
 if(method_code == 1)    %bisection-----------------------------------------
     for i=1:root_num
         curr_root = bisection(func,intervals(i,1),intervals(i,2),max_step,tol);
-        curr_error = error_calculator(func,curr_root);
-        final(i,1) = curr_root;
-        final(i,2) = curr_error;
+        curr_error = error_calculator(func,curr_root,sigfig);
+        final(i,1) = cellstr(strcat('(',num2str(intervals(i,1),sigfig),' , ',num2str(intervals(i,2),sigfig),')'));
+        final(i,2) = cellstr(num2str(curr_root,sigfig));
+        final(i,3) = cellstr(num2str(curr_error,sigfig));
     end
     set(handles.final_solve,'Data',final);
-    set(handles.message_box, 'String',':D');
-    return;
+    set(handles.message_box, 'String','Solved!');
+  return;
 end
 if(method_code == 2)    %secant--------------------------------------------
     for i=1:root_num
         curr_root = secant(func,intervals(i,1),intervals(i,2),max_step,tol);
-        curr_error = error_calculator(func,curr_root);
-        final(i,1) = curr_root;
-        final(i,2) = curr_error;
+        curr_error = error_calculator(func,curr_root,sigfig);
+        final(i,1) = cellstr(strcat('(',num2str(intervals(i,1),sigfig),' , ',num2str(intervals(i,2),sigfig),')'));
+        final(i,2) = cellstr(num2str(curr_root,sigfig));
+        final(i,3) = cellstr(num2str(curr_error,sigfig));
     end
     set(handles.final_solve,'Data',final);
-    set(handles.message_box, 'String',':D');
+    set(handles.message_box, 'String','Solved!');
     return;
 end
 if(method_code == 3)    %false-position------------------------------------
     for i=1:root_num
         curr_root = false_position(func,intervals(i,1),intervals(i,2),max_step,tol);
-        curr_error = error_calculator(func,curr_root);
-        final(i,1) = curr_root;
-        final(i,2) = curr_error;
+        curr_error = error_calculator(func,curr_root,sigfig);
+        final(i,1) = cellstr(strcat('(',num2str(intervals(i,1),sigfig),' , ',num2str(intervals(i,2),sigfig),')'));
+        final(i,2) = cellstr(num2str(curr_root,sigfig));
+        final(i,3) = cellstr(num2str(curr_error,sigfig));
     end
     set(handles.final_solve,'Data',final);
-    set(handles.message_box, 'String',':D');
+    set(handles.message_box, 'String','Solved!');
     return;
 end
 if(method_code == 4)    %newton-raphson------------------------------------
     for i=1:root_num
         curr_root = NR(func,intervals(i,1),intervals(i,2),tol);
-        curr_error = error_calculator(func,curr_root);
-        final(i,1) = curr_root;
-        final(i,2) = curr_error;
+        curr_error = error_calculator(func,curr_root,sigfig);
+        final(i,1) = cellstr(strcat('(',num2str(intervals(i,1),sigfig),' , ',num2str(intervals(i,2),sigfig),')'));
+        final(i,2) = cellstr(num2str(curr_root,sigfig));
+        final(i,3) = cellstr(num2str(curr_error,sigfig));
     end
     set(handles.final_solve,'Data',final);
-    set(handles.message_box, 'String',':D');
+    set(handles.message_box, 'String','Solved!');
+    return;
+end
+if(method_code == 5)    %fixed-point---------------------------------------
+    for i=1:root_num
+        gfunc = get(handles.gfunc, 'String');
+
+        index = strfind(gfunc,'=');
+        gfunc = gfunc(index+1:end);
+        if(size(strtrim(gfunc),1)==0)
+            curr_root = fixed_point(func,a,b,max_step,tol);
+        else
+            gfunc = strcat('@(x)(',gfunc,')');
+            gfunc = str2func(gfunc);
+            curr_root = fixed_point(func,a,b,max_step,tol,gfunc);
+        end
+        curr_error = error_calculator(func,curr_root,sigfig);
+        final(i,1) = cellstr(strcat('(',num2str(intervals(i,1),sigfig),' , ',num2str(intervals(i,2),sigfig),')'));
+        final(i,2) = cellstr(num2str(curr_root,sigfig));
+        final(i,3) = cellstr(num2str(curr_error,sigfig));
+    end
+    set(handles.final_solve,'Data',final);
+    set(handles.message_box, 'String','Solved!');
     return;
 end
 set(handles.message_box, 'String','The method isn''t implemented yet.');
@@ -303,47 +337,73 @@ function method_Callback(hObject, eventdata, handles)
 % Hints: contents = cellstr(get(hObject,'String')) returns method contents as cell array
 %        contents{get(hObject,'Value')} returns selected item from method
 method_code = get(handles.method, 'Value');
+set(handles.a,'Enable','on');
+set(handles.b,'Enable','on');
+set(handles.delta,'Enable','on');
+
+if(method_code ~= 11)  %not-GNR--------------------------------------------
+    set(handles.equations,'Visible','off');
+    set(handles.mahdude,'Visible','off');    
+end
+if(method_code ~= 5)
+    set(handles.gfunc,'Visible','off');    
+end
+    
+    
 if(method_code == 11)  %GNR------------------------------------------------
+    set(handles.a,'Enable','off');
+    set(handles.b,'Enable','off');
+    set(handles.delta,'Enable','off');
     set(handles.info, 'String','GNR dscrptn');
     set(handles.func,'String','f_1=');
     func_Callback(hObject, eventdata, handles);
     set(handles.equations,'Visible','on');
     set(handles.mahdude,'Visible','on');
+    
     return;
 end
-if(method_code ~= 11)  %not-GNR--------------------------------------------
-    set(handles.equations,'Visible','off');
-    set(handles.mahdude,'Visible','off');
-end
+% Bisection
+% Secant 
+% False Position
+% Newton Raphson
+% Fixed Point
+% 6.Riddler
+% 7.Muller
+% 8.Broyden
+% 9.Brent
+% 10.Chebyshev
+% Generalized Newton Raphson
+
 if(method_code == 1)  %bisection-------------------------------------------
     set(handles.info, 'String','The bisection method in mathematics is a root-finding method which repeatedly bisects an interval and then selects a subinterval in which a root must lie for further processing. It is a very simple and robust method, but it is also relatively slow. Because of this, it is often used to obtain a rough approximation to a solution which is then used as a starting point for more rapidly converging methods.');
 end
 if(method_code == 2)  %bisection-------------------------------------------
-    set(handles.info, 'String','dscrptn');
+    set(handles.info, 'String','secant method is a root-finding algorithm that uses a succession of roots of secant lines to better approximate a root of a function f. The secant method can be thought of as a finite difference approximation of Newton''s method');
 end
 if(method_code == 3)  %bisection-------------------------------------------
-    set(handles.info, 'String','dscrptn');
+    set(handles.info, 'String','false position method or regula falsi method is a term for problem-solving methods in arithmetic, algebra, and calculus. In simple terms, these methods begin by attempting to evaluate a problem using test ("false") values for the variables, and then adjust the values accordingly.');
 end
 if(method_code == 4)  %bisection-------------------------------------------
-    set(handles.info, 'String','dscrptn');
+    set(handles.info, 'String','Newton''s method assumes the function f to have a continuous derivative. Newton''s method may not converge if started too far away from a root. However, when it does converge, it is faster than the bisection method, and is usually quadratic. Newton''s method is also important because it readily generalizes to higher-dimensional problems.');
 end
 if(method_code == 5)  %bisection-------------------------------------------
-    set(handles.info, 'String','dscrptn');
+    set(handles.info, 'String',sprintf('Fixed-point iteration is a method of computing fixed points of iterated functions. \n=>If you have the g(x) function enter it in the below box, otherwise leave it blank.\n==>note that providing a g(x) function has more chance for the equation to be solved. '));
+    set(handles.gfunc,'Visible','on');
 end
 if(method_code == 6)  %bisection-------------------------------------------
     set(handles.info, 'String','dscrptn');
 end
 if(method_code == 7)  %bisection-------------------------------------------
-    set(handles.info, 'String','dscrptn');
+    set(handles.info, 'String','Muller''s method is based on the secant method, which constructs at every iteration a line through two points on the graph of f. Instead, Muller''s method uses three points, constructs the parabola through these three points, and takes the intersection of the x-axis with the parabola to be the next approximation.');
 end
 if(method_code == 8)  %bisection-------------------------------------------
-    set(handles.info, 'String','dscrptn');
+    set(handles.info, 'String','Broyden''s method is a quasi-Newton method for the root-finding. Newton''s method for solving the equation f(x)=0 uses the Jacobian matrix and determinant at every iteration. However, computing this Jacobian is a difficult operation. The idea behind Broyden''s method is to compute the whole Jacobian only at the first iteration, and to do a rank-one update at the other iterations.');
 end
 if(method_code == 9)  %bisection-------------------------------------------
-    set(handles.info, 'String','dscrptn');
+    set(handles.info, 'String','Brent''s method is a combination of the bisection method, the secant method and inverse quadratic interpolation. At every iteration, Brent''s method decides which method out of these three is likely to do best, and proceeds by doing a step according to that method. This gives a robust and fast method, which therefore enjoys considerable popularity.');
 end
 if(method_code == 10)  %bisection-------------------------------------------
-    set(handles.info, 'String','dscrptn');
+    set(handles.info, 'String','Chebyshev method interpolates the function with chebyshev polynomials using n polynomials.This method also can find multiple roots in compare with other methods.');
 end
 
 
@@ -393,9 +453,9 @@ if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgr
 end
 
 
-% --- Executes on button press in pushbutton8.
-function pushbutton8_Callback(hObject, eventdata, handles)
-% hObject    handle to pushbutton8 (see GCBO)
+% --- Executes on button press in ok_button.
+function ok_button_Callback(hObject, eventdata, handles)
+% hObject    handle to ok_button (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 func_Callback(hObject, eventdata, handles);
@@ -538,3 +598,48 @@ function ignore_Callback(hObject, eventdata, handles)
 % handles    structure with handles and user data (see GUIDATA)
 
 % Hint: get(hObject,'Value') returns toggle state of ignore
+
+
+% --- Executes when selected cell(s) is changed in final_solve.
+function final_solve_CellSelectionCallback(hObject, eventdata, handles)
+% hObject    handle to final_solve (see GCBO)
+% eventdata  structure with the following fields (see UITABLE)
+%	Indices: row and column indices of the cell(s) currently selecteds
+% handles    structure with handles and user data (see GUIDATA)
+
+
+
+function gfunc_Callback(hObject, eventdata, handles)
+% hObject    handle to gfunc (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+% Hints: get(hObject,'String') returns contents of gfunc as text
+%        str2double(get(hObject,'String')) returns contents of gfunc as a double
+
+
+% --- Executes during object creation, after setting all properties.
+function gfunc_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to gfunc (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    empty - handles not created until after all CreateFcns called
+
+% Hint: edit controls usually have a white background on Windows.
+%       See ISPC and COMPUTER.
+if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
+    set(hObject,'BackgroundColor','white');
+end
+
+
+% --- Executes when entered data in editable cell(s) in final_solve.
+function final_solve_CellEditCallback(hObject, eventdata, handles)
+% hObject    handle to final_solve (see GCBO)
+% eventdata  structure with the following fields (see UITABLE)
+%	Indices: row and column indices of the cell(s) edited
+%	PreviousData: previous data for the cell(s) edited
+%	EditData: string(s) entered by the user
+%	NewData: EditData or its converted form set on the Data property. Empty if Data was not changed
+%	Error: error string when failed to convert EditData to appropriate value for Data
+% handles    structure with handles and user data (see GUIDATA)
+eventdata.Indices
+'salam'
