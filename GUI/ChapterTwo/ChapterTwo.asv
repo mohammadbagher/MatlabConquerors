@@ -220,15 +220,15 @@ if(method_code == 5)    %fixed-point---------------------------------------
     for i=1:root_num
         gfunc = get(handles.gfunc, 'String');
 
-        index = strfind(gfunc,'=');
-        gfunc = gfunc(index+1:end);
-        if(size(strtrim(gfunc),1)==0)
-            curr_root = fixed_point(func,a,b,max_step,tol);
-        else
-            gfunc = strcat('@(x)(',gfunc,')');
-            gfunc = str2func(gfunc);
-            curr_root = fixed_point(func,a,b,max_step,tol,gfunc);
-        end
+index = strfind(gfunc,'=');
+gfunc = gfunc(index+1:end);
+if(size(strtrim(gfunc),1)==0)
+    set(handles.message_box,'String','Please enter a function!');
+    return;
+end
+func = strcat('@(x)(',func,')');
+func = str2func(func);
+        curr_root = fixed_point(func,a,b,max_step,tol,);
         curr_error = error_calculator(func,curr_root,sigfig);
         final(i,1) = vpa(curr_root,sigfig);
         final(i,2) = vpa(curr_error,sigfig);
@@ -332,9 +332,9 @@ function method_Callback(hObject, eventdata, handles)
 % Hints: contents = cellstr(get(hObject,'String')) returns method contents as cell array
 %        contents{get(hObject,'Value')} returns selected item from method
 method_code = get(handles.method, 'Value');
-set(handles.a,'Enable','on');
-set(handles.b,'Enable','on');
-set(handles.delta,'Enable','on');
+    set(handles.a,'Enable','on');
+    set(handles.b,'Enable','on');
+    set(handles.delta,'Enable','on');
     
     
 if(method_code == 11)  %GNR------------------------------------------------
@@ -362,12 +362,8 @@ end
 
 if(method_code ~= 11)  %not-GNR--------------------------------------------
     set(handles.equations,'Visible','off');
-    set(handles.mahdude,'Visible','off');    
+    set(handles.mahdude,'Visible','off');
 end
-if(method_code ~= 5)
-    set(handles.gfunc,'Visible','off');    
-end
-
 if(method_code == 1)  %bisection-------------------------------------------
     set(handles.info, 'String','The bisection method in mathematics is a root-finding method which repeatedly bisects an interval and then selects a subinterval in which a root must lie for further processing. It is a very simple and robust method, but it is also relatively slow. Because of this, it is often used to obtain a rough approximation to a solution which is then used as a starting point for more rapidly converging methods.');
 end
@@ -382,7 +378,6 @@ if(method_code == 4)  %bisection-------------------------------------------
 end
 if(method_code == 5)  %bisection-------------------------------------------
     set(handles.info, 'String',sprintf('Fixed-point iteration is a method of computing fixed points of iterated functions. \n=>If you have the g(x) function enter it in the below box, otherwise leave it blank.\n==>note that providing a g(x) function has more chance for the equation to be solved. '));
-    set(handles.gfunc,'Visible','on');
 end
 if(method_code == 6)  %bisection-------------------------------------------
     set(handles.info, 'String','dscrptn');

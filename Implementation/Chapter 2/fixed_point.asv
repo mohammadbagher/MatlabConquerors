@@ -1,0 +1,40 @@
+function root = fixed_point( func, a, b, max_step, tol, gfunc )
+%UNTITLED Summary of this function goes here
+%   Detailed explanation goes here
+if(nargin == 6)
+   root = fixed_point_iterator(func ,gfunc, a, b, max_step,tol);
+   return;
+end
+
+g = @(x)(log(func(x)+exp(x)));
+root = fixed_point_iterator(func,g,a,b,max_step,tol);
+if(~isnan(root))
+    return;
+end
+
+g = @(x)(func(x)+x);
+root = fixed_point_iterator(func,g,a,b,max_step,tol);
+if(~isnan(root))
+    return;
+end
+
+g = @(x)(log(func(x)+1)+1);
+root = fixed_point_iterator(func,g,a,b,max_step,tol);
+if(~isnan(root))
+    return;
+end
+
+g = @(x)(x*func(x) + x);
+root = fixed_point_iterator(func,g,a,b,max_step,tol);
+if(~isnan(root))
+    return;
+end
+
+g = @(x)(sqrt(func(x) + x^2));
+root = fixed_point_iterator(func,g,a,b,max_step,tol);
+if(~isnan(root))
+    return;
+end
++
+root = NaN;
+end
