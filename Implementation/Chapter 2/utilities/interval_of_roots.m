@@ -5,6 +5,7 @@ function intervals = interval_of_roots(func, a, b, delta )
 format long;
 n = ceil((b-a)/delta)-1;
 intervals = zeros(0);
+
 for i=1:n
     s = a+(i-1)*delta;
     e = a+i*delta;
@@ -30,8 +31,11 @@ fs=feval(func,s);
 fe=feval(func,e);
 t = size(intervals,1);
 
-if(fs*fe< 0.0)
+if(fs*fe<= 0.0)
     intervals(t+1,1) = s;
     intervals(t+1,2) = e; 
 end
+
+
+
 end

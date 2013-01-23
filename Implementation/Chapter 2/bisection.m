@@ -19,7 +19,7 @@ if f2 == 0.0;
     return; 
 end
 if f1*f2 > 0;
-    error('Root is not bracketed in (x1,x2)')
+   root = NaN;
 end
 xis = zeros(max_step,1);
 xis(1,1) = x1;
