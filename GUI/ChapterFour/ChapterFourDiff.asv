@@ -64,17 +64,60 @@ else
     info1(6,1) = str2double(get(handles.f6,'String'));
     info1(7,1) = str2double(get(handles.f7,'String'));
 end
-set(handles.r111,'Enable','on');
-set(handles.r112,'Enable','on');
-set(handles.r113,'Enable','on');
-set(handles.r114,'Enable','on');
-set(handles.r121,'Enable','on');
-set(handles.r122,'Enable','on');
-set(handles.r123,'Enable','on');
-set(handles.r124,'Enable','on');
-set(handles.r131,'Enable','on');
+
     
-set(handles.r111,'String','on');
+
+if(method_code == 1)
+    [ calc, exact, err, h, n ] = trapezoidal(func, a, b, horn, horn_code, handles.plot);
+end
+if(method_code == 2)
+    [ calc, exact, err, h, n ] = simpson_1_3(func, a, b, horn, horn_code, handles.plot);
+end
+if(method_code == 3)
+    [ calc, exact, err, h, n ] = simpson_3_8(func, a, b, horn, horn_code, handles.plot);
+end
+if(method_code == 4)
+    p = get(handles.prb, 'String');p=str2double(p);
+    [ calc, exact, err, h, n, romberg_table ] = romberg(func, a, b, horn, horn_code, handles.plot, p);
+end
+if(method_code == 1)
+    p = get(handles.pgl, 'String');p=str2double(p);
+    [ calc, exact, err, h, n ] = gauss_legendre(func, a, b, horn, horn_code, handles.plot, p);
+end
+set(handles.calc,'Enable','on');
+set(handles.exact,'Enable','on');
+set(handles.err,'Enable','on');
+set(handles.h,'Enable','on');
+set(handles.n,'Enable','on');
+set(handles.calc,'String',num2str(calc,sigfig));
+set(handles.exact,'String',num2str(exact,sigfig));
+set(handles.err,'String',num2str(err,sigfig));
+set(handles.h,'String',num2str(h,sigfig));
+set(handles.n,'String',num2str(n,sigfig));
+
+
+function func_Callback(hObject, eventdata, handles)
+
+
+function func_CreateFcn(hObject, eventdata, handles)
+if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
+    set(hObject,'BackgroundColor','white');
+end
+
+function abtb_Callback(hObject, eventdata, handles)
+string = get(handles.func,'string');
+string = strcat(string,'*^{*}');
+set(handles.func,'string',string);
+
+
+% --- Executes on button press in adivb.
+function adivb_Callback(hObject, eventdata, handles)
+% hObject    handle to adivb (see GCBO)
+% eventdata  reserved - to be defined in h1 future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+string = get(handles.func,'string');
+string = strcat(string,'\frac{*}{*}');
+set(handles.func,'string',string);
 
 
 % --- Executes on button press in pushbutton3.
