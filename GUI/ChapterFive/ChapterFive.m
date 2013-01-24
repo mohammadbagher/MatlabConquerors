@@ -152,7 +152,6 @@ method_code = get(handles.method1, 'Value');
 
 
 if method_code==2
-    func1
     Taylor( func1 , 0 ,0 , 0.1 ,2 ,2)
 elseif method_code==3
     Euler(func1 , x0 , y0 , h ,x_req )
