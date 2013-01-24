@@ -22,7 +22,7 @@ function varargout = ChapterThree(varargin)
 
 % Edit the above text to modify the response to help ChapterThree
 
-% Last Modified by GUIDE v2.5 09-Dec-2012 02:29:16
+% Last Modified by GUIDE v2.5 10-Dec-2012 00:32:34
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
@@ -54,7 +54,7 @@ function ChapterThree_OpeningFcn(hObject, eventdata, handles, varargin)
     position=get(handles.uipanel7,'position');
     set(handles.uipanel4,'Position',position);
 
-    addpath(genpath('C:\Users\majid\Desktop\NM'));
+    addpath(genpath('G:\Workspace\Matlab\MatlabConquerors'));
     
     rgb = imread('alphaabetax.png');
     axes(handles.alphaabetax); 
@@ -185,8 +185,6 @@ function togglebutton1_Callback(hObject, eventdata, handles)
 
 value=get(hObject,'Value');
 if value
-    set(handles.uipanel9,'visible','off');
-    set(handles.uitable1,'position',[140 30.75 49.6 11.55]);
     set(handles.uipanel7,'visible','off');
     set(handles.uipanel8,'Title','Fitted Function');
     set(hObject,'string','Change To Interpolation Mode');
@@ -195,22 +193,17 @@ if value
     set(handles.uipanel4,'visible','on');
     value2=get(handles.togglebutton2,'Value');
     if value2
-        set(handles.addrow,'enable','off');
         set(handles.uitable1,'visible','off');
         set(handles.edit2,'visible','on');
         set(handles.uipanel5,'visible','on');
     else
-        set(handles.addrow,'enable','on');
         set(handles.uitable1,'visible','on');
         set(handles.edit2,'visible','off');
         set(handles.uipanel5,'visible','off');
     end
 else
     set(handles.uipanel9,'visible','on');
-    set(handles.uitable1,'position',[140 30.75 49.6 9.05]);
-    set(handles.uipanel9,'visible','on');
     set(handles.uipanel8,'Title','Interpolated Function');
-    set(handles.addrow,'enable','on');
     set(handles.uitable1,'visible','on');
     set(handles.edit2,'visible','off');
     set(handles.uipanel5,'visible','off');
@@ -235,12 +228,10 @@ if value
     set(handles.edit2,'visible','on');
     set(hObject,'string','Change to with Points Mode');
     set(handles.uitable1,'visible','off');
-    set(handles.addrow,'enable','off');
 else
     set(handles.uipanel5,'visible','off');
     set(handles.edit2,'visible','off');
     set(handles.uitable1,'visible','on');
-    set(handles.addrow,'enable','on');
     set(hObject,'string','Change to with Function Mode');
 end
 
@@ -298,47 +289,22 @@ if (curvfitting)
     if strcmp(xtag,'radioalphaabetax')
         [a b c d e f g]=bestCurvefitting(handles.axes1,sendingX,sendingY);
         x=min(sendingX):.1:max(sendingX);
-        ax=handles.axes25;
-        cla(ax);
-        set(handles.axes25,'visible','off');
-        text1=text(0, 0, char(b), 'Parent', ax);
-        set(text1,'FontName','Courier New','FontSize',15);
         plot(handles.axes1,x,eval(b),'red');
     elseif strcmp(xtag,'radioalnx')
         [a b c d e f g]=bestCurvefitting(handles.axes1,sendingX,sendingY);
         x=min(sendingX):.1:max(sendingX);
-        ax=handles.axes25;
-        cla(ax);
-        set(handles.axes25,'visible','off');
-        text1=text(0, 0, char(c), 'Parent', ax);
-        set(text1,'FontName','Courier New','FontSize',15);
         plot(handles.axes1,x,eval(c),'red');
     elseif strcmp(xtag,'radioaxb')
         [a b c d e f g]=bestCurvefitting(handles.axes1,sendingX,sendingY);
         x=min(sendingX):.1:max(sendingX);
-        ax=handles.axes25;
-        cla(ax);
-        set(handles.axes25,'visible','off');
-        text1=text(0, 0, char(d), 'Parent', ax);
-        set(text1,'FontName','Courier New','FontSize',15);
         plot(handles.axes1,x,eval(d),'red');
     elseif strcmp(xtag,'radiooaxb')
         [a b c d e f g]=bestCurvefitting(handles.axes1,sendingX,sendingY);
         x=min(sendingX):.1:max(sendingX);
-        ax=handles.axes25;
-        cla(ax);
-        set(handles.axes25,'visible','off');
-        text1=text(0, 0, char(e), 'Parent', ax);
-        set(text1,'FontName','Courier New','FontSize',15);
         plot(handles.axes1,x,eval(e),'red');
     elseif strcmp(xtag,'radioaixi')
         [a b c d e f g]=bestCurvefitting(handles.axes1,sendingX,sendingY);
         x=min(sendingX):.1:max(sendingX);
-        ax=handles.axes25;
-        cla(ax);
-        set(handles.axes25,'visible','off');
-        text1=text(0, 0, char(f), 'Parent', ax);
-        set(text1,'FontName','Courier New','FontSize',15);
         plot(handles.axes1,x,eval(f),'red');
         x=min(sendingX):.1:max(sendingX);
         plot(handles.axes1,x,eval(g),'black');
@@ -347,65 +313,17 @@ else
     x=get(handles.uipanel7,'SelectedObject');
     xtag = get(x, 'Tag');
     if strcmp(xtag,'radiologrange')
-        [a b]=lagrange_interpolation(sendingX,sendingY,x_req,handles.axes1);
-        ax=handles.axes25;
-        cla(ax);
-        set(handles.axes25,'visible','off');
-        text1=text(0, 0, char(a), 'Parent', ax);
-        set(text1,'FontName','Courier New','FontSize',15);
-        b=num2str(b);
-        b=strcat('Ans= ',b);
-        set(handles.answeri,'string',b);
+        lagrange_interpolation(sendingX,sendingY,x_req,handles.axes1);
     elseif strcmp(xtag,'radioNDD')
-        [a b]=newtondevideddiffrencec(sendingX,sendingY,x_req,handles.axes1);
-        ax=handles.axes25;
-        cla(ax);
-        set(handles.axes25,'visible','off');
-        text1=text(0, 0, char(a), 'Parent', ax);
-        set(text1,'FontName','Courier New','FontSize',15);
-        b=num2str(b);
-        b=strcat('Ans= ',b);
-        set(handles.answeri,'string',b);
+        newtondevideddiffrencec(sendingX,sendingY,x_req,handles.axes1);
     elseif strcmp(xtag,'radioNF')
-        [a b]=nfwp(sendingX,sendingY,x_req,handles.axes1);
-        ax=handles.axes25;
-        cla(ax);
-        set(handles.axes25,'visible','off');
-        text1=text(0, 0, char(a), 'Parent', ax);
-        set(text1,'FontName','Courier New','FontSize',15);
-        b=num2str(b);
-        b=strcat('Ans= ',b);
-        set(handles.answeri,'string',b);
+        nfwp(sendingX,sendingY,x_req,handles.axes1);
     elseif strcmp(xtag,'radioNB')
-        [a b]=nbwp(sendingX,sendingY,x_req,handles.axes1);
-        ax=handles.axes25;
-        cla(ax);
-        set(handles.axes25,'visible','off');
-        text1=text(0, 0, char(a), 'Parent', ax);
-        set(text1,'FontName','Courier New','FontSize',15);
-        b=num2str(b);
-        b=strcat('Ans= ',b);
-        set(handles.answeri,'string',b);
+        nbwp(sendingX,sendingY,x_req,handles.axes1);
     elseif strcmp(xtag,'radioNFC')
-        [a b]=nfcp(sendingX,sendingY,x_req,handles.axes1);
-        ax=handles.axes25;
-        cla(ax);
-        set(handles.axes25,'visible','off');
-        text1=text(0, 0, char(a), 'Parent', ax);
-        set(text1,'FontName','Courier New','FontSize',15);
-        b=num2str(b);
-        b=strcat('Ans= ',b);
-        set(handles.answeri,'string',b);
+        nfcp(sendingX,sendingY,x_req,handles.axes1);
     elseif strcmp(xtag,'radioNBC')
-        [a b]=nbcp(sendingX,sendingY,x_req,handles.axes1);
-        ax=handles.axes25;
-        cla(ax);
-        set(handles.axes25,'visible','off');
-        text1=text(0, 0, char(a), 'Parent', ax);
-        set(text1,'FontName','Courier New','FontSize',15);
-        b=num2str(b);
-        b=strcat('Ans= ',b);
-        set(handles.answeri,'string',b);
+        nbcp(sendingX,sendingY,x_req,handles.axes1);
     end
 end
 
@@ -425,9 +343,9 @@ function uipanel4_CreateFcn(hObject, eventdata, handles)
 % handles    empty - handles not created until after all CreateFcns called
 
 
-% --- Executes on button press in pushbutton2.
-function pushbutton2_Callback(hObject, eventdata, handles)
-% hObject    handle to pushbutton2 (see GCBO)
+% --- Executes on button press in back.
+function back_Callback(hObject, eventdata, handles)
+% hObject    handle to back (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 close(ChapterThree);
@@ -435,8 +353,8 @@ FirstPage();
 
 
 % --- Executes during object creation, after setting all properties.
-function pushbutton2_CreateFcn(hObject, eventdata, handles)
-% hObject    handle to pushbutton2 (see GCBO)
+function back_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to back (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    empty - handles not created until after all CreateFcns called
 
@@ -491,25 +409,31 @@ function uitable4_CellEditCallback(hObject, eventdata, handles)
 % handles    structure with handles and user data (see GUIDATA)
 
 
-% --- Executes on button press in pushbutton4.
-function pushbutton4_Callback(hObject, eventdata, handles)
-% hObject    handle to pushbutton4 (see GCBO)
-% eventdata  reserved - to be defined in a future version of MATLAB
-% handles    structure with handles and user data (see GUIDATA)
-uitable1_CellEditCallback(hObject, eventdata, handles);
-
-
 % --- Executes on button press in addrow.
 function addrow_Callback(hObject, eventdata, handles)
 % hObject    handle to addrow (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
-        data=get(handles.uitable1,'data');
-        b=repmat({''},1,2);
-        data(size(data,1)+1,1)=b(1);
-        data(size(data,1),2)=b(1);
-        data(size(data,1)+1,1)=b(1);
-        data(size(data,1),2)=b(1);
-        data(size(data,1)+1,1)=b(1);
-        data(size(data,1),2)=b(1);
-        set(handles.uitable1,'Data',data);
+data=get(handles.uitable1,'data');
+       b=repmat({''},1,2);
+       data(size(data,1)+1,1)=b(1);
+       data(size(data,1),2)=b(1);
+       data(size(data,1)+1,1)=b(1);
+       data(size(data,1),2)=b(1);
+       data(size(data,1)+1,1)=b(1);
+       data(size(data,1),2)=b(1);
+       set(handles.uitable1,'Data',data);
+
+
+% --- Executes on button press in back.
+function back_Callback(hObject, eventdata, handles)
+% hObject    handle to back (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+
+% --- Executes during object creation, after setting all properties.
+function back_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to back (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    empty - handles not created until after all CreateFcns called
