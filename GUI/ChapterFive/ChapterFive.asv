@@ -125,7 +125,7 @@ function pushbutton3_Callback(hObject, eventdata, handles)
 method_code = get(handles.method1, 'Value');
     func1=get(handles.edit1,'string');
     func1=func1(7:end);
-    strcat('"',func1,'"');
+    %strcat('"',func1,'"');
     
     func2=get(handles.edit17,'string');
     func2=func2(7:end);
