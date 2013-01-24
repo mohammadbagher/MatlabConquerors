@@ -22,7 +22,7 @@ function varargout = ChapterFive(varargin)
 
 % Edit the above text to modify the response to help ChapterFive
 
-% Last Modified by GUIDE v2.5 24-Jan-2013 12:12:47
+% Last Modified by GUIDE v2.5 24-Jan-2013 14:26:31
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
@@ -93,6 +93,12 @@ function edit1_Callback(hObject, eventdata, handles)
 % hObject    handle to edit1 (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
+ax=handles.axes1;
+FuncString=get(handles.edit1,'string');
+cla(ax);
+set(handles.axes1,'visible','off');
+text1=text(0, 0, FuncString, 'Parent', ax);
+set(text1,'FontName','Courier New','FontSize',15);
 
 % Hints: get(hObject,'String') returns contents of edit1 as text
 %        str2double(get(hObject,'String')) returns contents of edit1 as a double
@@ -117,27 +123,62 @@ function pushbutton3_Callback(hObject, eventdata, handles)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 method_code = get(handles.method1, 'Value');
+    func1=get(handles.edit1,'string');
+    func1=func1(7:end);
+    
+    func2=get(handles.edit17,'string');
+    func2=func2(7:end);
+    
+    h=get(handles.edit8,'string');
+    h=str2num(h);
+    
+    x0=get(handles.edit15,'string');
+    x0=str2num(x0);
+    
+    y0=get(handles.edit13,'string');
+    y0=str2num(y0);
+    
+    steps=get(handles.edit23,'string');
+    steps=str2num(steps);
+    
+    z0=get(handles.edit16,'string');
+    z0=str2num(z0);
+    
+    x_req=get(handles.edit26,'string');
+    x_req=str2num(x_req);
+    
+    rung_a=get(handles.edit9,'string');
+    rung_a=str2num(rung_a);
 
-if method_code==1
-    set(handles.text14,'string','Not Selected Yet');
-elseif method_code==2    
-    set(handles.text14,'string','Taylor Method');
+
+if method_code==2
+    func1
+    Taylor( func1 , 0 ,0 , 0.1 ,2 ,2)
 elseif method_code==3
-    set(handles.text14,'string','Euler Method');
+    Euler(func1 , x0 , y0 , h ,x_req )
 elseif method_code==4
-    set(handles.text14,'string','Modifed Euler Method');
+    Modified_Euler( func1 , x0 ,y0 , h ,x_req )
 elseif method_code==5
-    set(handles.text14,'string','Not Selected Yet');
+    method2 = get(handles.method2, 'Value');
+    if method2==2
+        Runge_kutta( func1 , x0 ,y0 , h ,x_req,0 )
+    elseif method2==3
+        Runge_kutta( func1 , x0 ,y0 , h ,x_req,0.25 )
+    elseif method2==4
+        Runge_kutta( func1 , x0 ,y0 , h ,x_req,0.5 )
+    elseif method2==5
+        Runge_kutta( func1 , x0 ,y0 , h ,x_req,rung_a )
+    end
 elseif method_code==6
-    set(handles.text14,'string','Runge-kutta-3rd Order Method');
+    Rung_Kuttaorder3( func1,x0,y0,h,x_req )
 elseif method_code==7
-    set(handles.text14,'string','Runge-kutta-4rd Order Method');
+    Runge_Kuttaorder4(func1,x0,y0,h,x_req )
 elseif method_code==8
-    set(handles.text14,'string','Adams-Multon Method');
+    Adams_Multon(func1,x0,y0,h,x_req)
 elseif method_code==9
-    set(handles.text14,'string','2nd order D.E By Euler method Method');
+    DE_Euler( func1,x0,x0,func2,z0,h,x_req )
 elseif method_code==10
-    set(handles.text14,'string','2nd order D.E 4th order Runge-Kutta Method');
+    DE_Runge_kutta4th( func1,x0,x0,func2,z0,h,x_req )
 end
 
 
@@ -180,8 +221,12 @@ end
 
 if method_code==9||method_code==10
     set(handles.uipanel15,'visible','on');
+    set(handles.uipanel9,'visible','on');
+    set(handles.edit17,'visible','on');
 else
     set(handles.uipanel15,'visible','off');
+    set(handles.uipanel9,'visible','off');
+    set(handles.edit17,'visible','off');
 end
 
 if method_code==2
@@ -394,6 +439,12 @@ function edit17_Callback(hObject, eventdata, handles)
 % hObject    handle to edit17 (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
+ax=handles.axes3;
+FuncString=get(handles.edit17,'string');
+cla(ax);
+set(handles.axes3,'visible','off');
+text1=text(0, 0, FuncString, 'Parent', ax);
+set(text1,'FontName','Courier New','FontSize',15);
 
 % Hints: get(hObject,'String') returns contents of edit17 as text
 %        str2double(get(hObject,'String')) returns contents of edit17 as a double
@@ -494,6 +545,29 @@ function edit23_Callback(hObject, eventdata, handles)
 % --- Executes during object creation, after setting all properties.
 function edit23_CreateFcn(hObject, eventdata, handles)
 % hObject    handle to edit23 (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    empty - handles not created until after all CreateFcns called
+
+% Hint: edit controls usually have a white background on Windows.
+%       See ISPC and COMPUTER.
+if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
+    set(hObject,'BackgroundColor','white');
+end
+
+
+
+function edit26_Callback(hObject, eventdata, handles)
+% hObject    handle to edit26 (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+% Hints: get(hObject,'String') returns contents of edit26 as text
+%        str2double(get(hObject,'String')) returns contents of edit26 as a double
+
+
+% --- Executes during object creation, after setting all properties.
+function edit26_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to edit26 (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    empty - handles not created until after all CreateFcns called
 
