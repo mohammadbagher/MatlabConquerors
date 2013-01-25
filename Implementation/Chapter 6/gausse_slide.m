@@ -1,5 +1,4 @@
-function X = gausse_slide(n, eqs, X)
-    [A, B] = extract_matrix(n, eqs);
+function X = gausse_slide(A, B, X)
     for i  = 1 : n
         TMP = X;
         TMP(i) = 0;
