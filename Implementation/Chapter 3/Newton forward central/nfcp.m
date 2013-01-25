@@ -50,12 +50,13 @@ prod=sym(1);
      prod=prod*((r+(-1)^(j)*floor((j+1)/2))/(j+1));
      y_req=y_req+prod*DD(ceil((n-j+1)/2),j+3);
  end
-func=expand(y_req);
-x=min(x):.1:max(x);
+ func=expand(y_req);
+ hnew=(x(2)-x(1))/20;
+ x=min(x):hnew:max(x);
  plot(x,eval(func));
  hleg1 = legend('requestpoint','firstpoints','newtonforwardcentralinterpolation');
  xlabel('points');
-ylabel('approximations');
+ ylabel('approximations');
 
 end
 

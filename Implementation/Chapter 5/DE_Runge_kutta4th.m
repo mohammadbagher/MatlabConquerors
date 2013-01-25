@@ -2,7 +2,7 @@ function [ ans1 ] = DE_Runge_kutta4th( f,x0,f0,g,g0,h,x_request )
 syms x;
 syms y;
 syms z;
-n=(x_request-x0)/h;
+n=(x_request-x0)/h+1;
 f=subs(f);
 g=subs(g);
 k11=subs(f,[x y z],[x0,f0,g0]);

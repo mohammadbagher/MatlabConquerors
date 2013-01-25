@@ -1,6 +1,6 @@
 function [ ans1 ] = Adams_Multon(func,x0,y0,h,x_request)
 
-n=(x_request-x0)/h;
+n=(x_request-x0)/h+1;
 corrector=Runge_Kuttaorder4(func,x0,y0,h,min(x_request,x0+3*h));
 x0=x0+4*h;
 
@@ -9,7 +9,7 @@ syms y;
 
 func=subs(func);
 
-for i=4:n
+for i=5:n
     f1=subs(func,[x y],[x0-h,corrector(i-1,2)]);
     f2=subs(func,[x y],[x0-2*h,corrector(i-2,2)]);
     f3=subs(func,[x y],[x0-3*h,corrector(i-3,2)]);

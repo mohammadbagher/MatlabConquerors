@@ -93,7 +93,8 @@ plot(axes,x,y_request,'+');hold on;
 xlabel('points');
 ylabel('approximations');
 plot(axes,X,Y,'or');
-x=min(x):.1:max(x);
+hnew=(x(2)-x(1))/20;
+x=min(x):hnew:max(x);
 
 funcreturn=expand(func);
 plot(axes,x,eval(func));
