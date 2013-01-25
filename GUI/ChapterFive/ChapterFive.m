@@ -153,32 +153,44 @@ method_code = get(handles.method1, 'Value');
 
 
 if method_code==2
-    Taylor( func1 , 0 ,0 , 0.1 ,2 ,2)
+    ans=Taylor( func1 , 0 ,0 , 0.1 ,2 ,2);
+    set(handles.uitable2,'data',ans);
 elseif method_code==3
-    Euler(func1 , x0 , y0 , h ,x_req )
+    ans=Euler(func1 , x0 , y0 , h ,x_req );
+    set(handles.uitable2,'data',ans);
 elseif method_code==4
-    Modified_Euler( func1 , x0 ,y0 , h ,x_req )
+    ans=Modified_Euler( func1 , x0 ,y0 , h ,x_req );
+    set(handles.uitable2,'data',ans);
 elseif method_code==5
     method2 = get(handles.method2, 'Value');
     if method2==2
-        Runge_kutta( func1 , x0 ,y0 , h ,x_req,0 )
+        ans=Runge_kutta( func1 , x0 ,y0 , h ,x_req,0 );
+        set(handles.uitable2,'data',ans);
     elseif method2==3
-        Runge_kutta( func1 , x0 ,y0 , h ,x_req,0.25 )
+        ans=Runge_kutta( func1 , x0 ,y0 , h ,x_req,0.25 );
+        set(handles.uitable2,'data',ans);
     elseif method2==4
-        Runge_kutta( func1 , x0 ,y0 , h ,x_req,0.5 )
+        ans=Runge_kutta( func1 , x0 ,y0 , h ,x_req,0.5 );
+        set(handles.uitable2,'data',ans);
     elseif method2==5
-        Runge_kutta( func1 , x0 ,y0 , h ,x_req,rung_a )
+        ans=Runge_kutta( func1 , x0 ,y0 , h ,x_req,rung_a );
+        set(handles.uitable2,'data',ans);
     end
 elseif method_code==6
-    Rung_Kuttaorder3( func1,x0,y0,h,x_req )
+    ans=Rung_Kuttaorder3( func1,x0,y0,h,x_req );
+    set(handles.uitable2,'data',ans);
 elseif method_code==7
-    Runge_Kuttaorder4(func1,x0,y0,h,x_req )
+    ans=Runge_Kuttaorder4(func1,x0,y0,h,x_req );
+    set(handles.uitable2,'data',ans);
 elseif method_code==8
-    Adams_Multon(func1,x0,y0,h,x_req)
+    ans=Adams_Multon(func1,x0,y0,h,x_req);
+    set(handles.uitable2,'data',ans);
 elseif method_code==9
-    DE_Euler( func1,x0,x0,func2,z0,h,x_req )
+    ans=DE_Euler( func1,x0,x0,func2,z0,h,x_req );
+    set(handles.uitable2,'data',ans);
 elseif method_code==10
-    DE_Runge_kutta4th( func1,x0,x0,func2,z0,h,x_req )
+    ans=DE_Runge_kutta4th( func1,x0,x0,func2,z0,h,x_req );
+    set(handles.uitable2,'data',ans);
 end
 
 
