@@ -126,7 +126,15 @@ function pushbutton6_Callback(hObject, eventdata, handles)
 % hObject    handle to pushbutton6 (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
-
+data=get(handles.uitable3,'data');
+       b=repmat({''},1,2);
+       data(size(data,1)+1,1)=b(1);
+       data(size(data,1),2)=b(1);
+       data(size(data,1)+1,1)=b(1);
+       data(size(data,1),2)=b(1);
+       data(size(data,1)+1,1)=b(1);
+       data(size(data,1),2)=b(1);
+       set(handles.uitable3,'Data',data);
 
 % --- Executes on selection change in method1.
 function method1_Callback(hObject, eventdata, handles)

@@ -1,35 +1,35 @@
-function varargout = ChapterSix(varargin)
-% CHAPTERSIX MATLAB code for ChapterSix.fig
-%      CHAPTERSIX, by itself, creates a new CHAPTERSIX or raises the existing
+function varargout = Crammer(varargin)
+% CRAMMER MATLAB code for Crammer.fig
+%      CRAMMER, by itself, creates a new CRAMMER or raises the existing
 %      singleton*.
 %
-%      H = CHAPTERSIX returns the handle to a new CHAPTERSIX or the handle to
+%      H = CRAMMER returns the handle to a new CRAMMER or the handle to
 %      the existing singleton*.
 %
-%      CHAPTERSIX('CALLBACK',hObject,eventData,handles,...) calls the local
-%      function named CALLBACK in CHAPTERSIX.M with the given input arguments.
+%      CRAMMER('CALLBACK',hObject,eventData,handles,...) calls the local
+%      function named CALLBACK in CRAMMER.M with the given input arguments.
 %
-%      CHAPTERSIX('Property','Value',...) creates a new CHAPTERSIX or raises the
+%      CRAMMER('Property','Value',...) creates a new CRAMMER or raises the
 %      existing singleton*.  Starting from the left, property value pairs are
-%      applied to the GUI before ChapterSix_OpeningFcn gets called.  An
+%      applied to the GUI before Crammer_OpeningFcn gets called.  An
 %      unrecognized property name or invalid value makes property application
-%      stop.  All inputs are passed to ChapterSix_OpeningFcn via varargin.
+%      stop.  All inputs are passed to Crammer_OpeningFcn via varargin.
 %
 %      *See GUI Options on GUIDE's Tools menu.  Choose "GUI allows only one
 %      instance to run (singleton)".
 %
 % See also: GUIDE, GUIDATA, GUIHANDLES
 
-% Edit the above text to modify the response to help ChapterSix
+% Edit the above text to modify the response to help Crammer
 
-% Last Modified by GUIDE v2.5 25-Jan-2013 07:25:09
+% Last Modified by GUIDE v2.5 25-Jan-2013 08:11:29
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
 gui_State = struct('gui_Name',       mfilename, ...
                    'gui_Singleton',  gui_Singleton, ...
-                   'gui_OpeningFcn', @ChapterSix_OpeningFcn, ...
-                   'gui_OutputFcn',  @ChapterSix_OutputFcn, ...
+                   'gui_OpeningFcn', @Crammer_OpeningFcn, ...
+                   'gui_OutputFcn',  @Crammer_OutputFcn, ...
                    'gui_LayoutFcn',  [] , ...
                    'gui_Callback',   []);
 if nargin && ischar(varargin{1})
@@ -44,28 +44,28 @@ end
 % End initialization code - DO NOT EDIT
 
 
-% --- Executes just before ChapterSix is made visible.
-function ChapterSix_OpeningFcn(hObject, eventdata, handles, varargin)
+% --- Executes just before Crammer is made visible.
+function Crammer_OpeningFcn(hObject, eventdata, handles, varargin)
 % This function has no output args, see OutputFcn.
 % hObject    handle to figure
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
-% varargin   command line arguments to ChapterSix (see VARARGIN)
+% varargin   command line arguments to Crammer (see VARARGIN)
 
 b=repmat({''},3,1);
        set(handles.uitable3,'Data',b);
-% Choose default command line output for ChapterSix
+% Choose default command line output for Crammer
 handles.output = hObject;
 
 % Update handles structure
 guidata(hObject, handles);
 
-% UIWAIT makes ChapterSix wait for user response (see UIRESUME)
+% UIWAIT makes Crammer wait for user response (see UIRESUME)
 % uiwait(handles.figure1);
 
 
 % --- Outputs from this function are returned to the command line.
-function varargout = ChapterSix_OutputFcn(hObject, eventdata, handles) 
+function varargout = Crammer_OutputFcn(hObject, eventdata, handles) 
 % varargout  cell array for returning output args (see VARARGOUT);
 % hObject    handle to figure
 % eventdata  reserved - to be defined in a future version of MATLAB
@@ -126,7 +126,15 @@ function pushbutton6_Callback(hObject, eventdata, handles)
 % hObject    handle to pushbutton6 (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
-
+data=get(handles.uitable3,'data');
+       b=repmat({''},1,2);
+       data(size(data,1)+1,1)=b(1);
+       data(size(data,1),2)=b(1);
+       data(size(data,1)+1,1)=b(1);
+       data(size(data,1),2)=b(1);
+       data(size(data,1)+1,1)=b(1);
+       data(size(data,1),2)=b(1);
+       set(handles.uitable3,'Data',data);
 
 % --- Executes on selection change in method1.
 function method1_Callback(hObject, eventdata, handles)
@@ -281,24 +289,10 @@ end
 primary_data=repmat({''},size(x,2),2);
 set(handles.uitable5,'data',primary_data);
 
-
-% set(handles.uitable5,'data',primary_data);
-% for i=2:size(primary_data,2)
-% data = get(handles.uitable5,'data');
-% newRowdata = cat(1,data,x{i});
-% set(handles.uitable5,'data',newRowdata);  
-% end
-
-% 
-%  for i=1:size(x,2)
-%      primary_data(i,1)=x(i);
-%      primary_data(i,2)=det(i);
-%  end
 matrix=[0 , 0];
 for i=1:size(x,2)
-    matrix(i,1)=x()
+    matrix(i,1)=x(i);
+    matrix(i,2)=dets(i);
 end
 
-set(handles.uitable5,'data',x);
-x
-dets
+set(handles.uitable5,'data',matrix);
