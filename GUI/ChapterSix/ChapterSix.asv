@@ -22,7 +22,7 @@ function varargout = ChapterSix(varargin)
 
 % Edit the above text to modify the response to help ChapterSix
 
-% Last Modified by GUIDE v2.5 25-Jan-2013 00:06:05
+% Last Modified by GUIDE v2.5 25-Jan-2013 07:25:09
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
@@ -51,8 +51,9 @@ function ChapterSix_OpeningFcn(hObject, eventdata, handles, varargin)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 % varargin   command line arguments to ChapterSix (see VARARGIN)
-position=get(handles.method1,'position');
-    set(handles.method2,'Position',position);
+
+b=repmat({''},3,1);
+       set(handles.uitable3,'Data',b);
 % Choose default command line output for ChapterSix
 handles.output = hObject;
 
@@ -267,4 +268,37 @@ function pushbutton9_Callback(hObject, eventdata, handles)
 % hObject    handle to pushbutton9 (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
-data=get(handles.uitable)
+data=get(handles.uitable3,'data');
+n = 0;
+for i = 1 : size(data, 1)
+    %size(cell2mat(data(i)), 1)
+    if(size(cell2mat(data(i)), 1) ~= 0)
+        n = n + 1;
+    end
+end
+[x, dets]= cramer(n, data);
+
+primary_data=repmat({''},size(x,2),2);
+set(handles.uitable5,'data',primary_data);
+
+
+% set(handles.uitable5,'data',primary_data);
+% for i=2:size(primary_data,2)
+% data = get(handles.uitable5,'data');
+% newRowdata = cat(1,data,x{i});
+% set(handles.uitable5,'data',newRowdata);  
+% end
+
+% 
+%  for i=1:size(x,2)
+%      primary_data(i,1)=x(i);
+%      primary_data(i,2)=det(i);
+%  end
+matrix=[0 , 0];
+for i=1:size(x,2)
+    matrix(i,1)=x()
+end
+
+set(handles.uitable5,'data',x);
+x
+dets
