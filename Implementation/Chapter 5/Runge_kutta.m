@@ -6,7 +6,7 @@ alphabeta=1/(2*b);
 syms x;
 syms y;
 
-n=(x_request-x0)/h;
+n=(x_request-x0)/h+1;
 func=subs(func);
 
 k1=h*func;

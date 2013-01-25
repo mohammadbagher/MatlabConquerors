@@ -3,7 +3,7 @@ func=subs(func);
 
 syms x;
 syms y;
-n=(x_request-x0)/h;
+n=(x_request-x0)/h+1;
 tempy=y+h*func;
 temph=h;
 tempfunc=func;

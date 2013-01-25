@@ -1,6 +1,6 @@
 function [ ans1 ] = Rung_Kuttaorder3( func,x0,y0,h,x_request )
 
-n=(x_request-x0)/h;
+n=(x_request-x0)/h+1;
 syms x;
 syms y;
 
