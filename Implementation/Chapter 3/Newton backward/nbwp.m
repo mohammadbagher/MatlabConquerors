@@ -51,7 +51,8 @@ prod=sym(1);
      y_req=sym(y_req+prod*DD(n-j-1,j+3));
  end
 func=expand(y_req);
-x=min(x):.1:max(x);
+hnew=(x(2)-x(1))/20;
+x=min(x):hnew:max(x);
  plot(x,eval(func));
  hleg1 = legend('requestpoint','firstpoints','newtonbackwardinterpolation');
  xlabel('points');

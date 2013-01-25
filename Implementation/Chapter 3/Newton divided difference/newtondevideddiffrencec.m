@@ -56,8 +56,8 @@ P(1,n)=P(1,n)+y(1);
 y_eval = polyval(P,x_request);
 x_ans=y_eval;
 
-
-x_eval = min(x):0.1:max(x);
+hnew=(x(2)-x(1))/20;
+x_eval = min(x):hnew:max(x);
 
 y_eval = polyval(P,x_eval);
 

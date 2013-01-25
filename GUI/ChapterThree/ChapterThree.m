@@ -22,7 +22,7 @@ function varargout = ChapterThree(varargin)
 
 % Edit the above text to modify the response to help ChapterThree
 
-% Last Modified by GUIDE v2.5 10-Dec-2012 00:32:34
+% Last Modified by GUIDE v2.5 25-Jan-2013 10:57:14
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
@@ -435,5 +435,12 @@ function back_Callback(hObject, eventdata, handles)
 % --- Executes during object creation, after setting all properties.
 function back_CreateFcn(hObject, eventdata, handles)
 % hObject    handle to back (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    empty - handles not created until after all CreateFcns called
+
+
+% --- Executes during object creation, after setting all properties.
+function figure1_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to figure1 (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    empty - handles not created until after all CreateFcns called
