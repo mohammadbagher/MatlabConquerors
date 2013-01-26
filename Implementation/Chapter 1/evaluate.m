@@ -1,4 +1,4 @@
-function result = evaluate(str, var, value, error)
+function result = evaluate(str, var, value, error, mantis)
     global findvars;
     global absErrors;
     global relErrors;
