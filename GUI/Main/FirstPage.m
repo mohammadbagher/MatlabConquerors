@@ -22,7 +22,7 @@ function varargout = FirstPage(varargin)
 
 % Edit the above text to modify the response to help FirstPage
 
-% Last Modified by GUIDE v2.5 26-Jan-2013 06:07:57
+% Last Modified by GUIDE v2.5 26-Jan-2013 06:45:44
 
 % Begin initialization code - DO NOT EDIT
 
@@ -121,15 +121,8 @@ g=a(1:x:end,1:y:end,:);
 g(g==255)=5.5*255;
 set(handles.pushbutton9,'CData',g);
 
-
-
-position=get(handles.pushbutton10,'position');
-    set(handles.pushbutton19,'Position',position);
-position=get(handles.pushbutton11,'position');
-    set(handles.pushbutton20,'Position',position);
-
-
-
+% position=get(handles.uipanel6,'position');
+%     set(handles.uipanel7,'Position',[49.6,5.153846153846154,74.60000000000001,11.615384615384619]);
 
 % Choose default command line output for FirstPage
 handles.output = hObject;
@@ -163,6 +156,8 @@ function chapter1_Callback(hObject, eventdata, handles)
 %Declare and initialize variable to store the count persistent count
 ChapterOne;
 
+set(handles.uipanel6,'visible','off');
+set(handles.uipanel7,'visible','off');
 % --- If Enable == 'on', executes on mouse press in 5 pixel border.
 % --- Otherwise, executes on mouse press in 5 pixel border or over chapter1.
 function chapter1_ButtonDownFcn(hObject, eventdata, handles)
@@ -234,6 +229,8 @@ function chapter6_Callback(hObject, eventdata, handles)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 
+set(handles.uipanel6,'visible','on');
+set(handles.uipanel7,'visible','off');
 
 % --- Executes on button press in chapter2.
 function chapter2_Callback(hObject, eventdata, handles)
@@ -241,16 +238,16 @@ function chapter2_Callback(hObject, eventdata, handles)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 ChapterTwo;
+set(handles.uipanel6,'visible','off');
+set(handles.uipanel7,'visible','off');
 
 % --- Executes on button press in chapter4.
 function chapter4_Callback(hObject, eventdata, handles)
 % hObject    handle to chapter4 (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
-set(handles.pushbutton19,'visible','on');
-set(handles.pushbutton20,'visible','on');
-set(handles.pushbutton11,'visible','off');
-set(handles.pushbutton12,'visible','off');
+set(handles.uipanel6,'visible','off');
+set(handles.uipanel7,'visible','on');
 
 % --- Executes on button press in chapter5.
 function chapter5_Callback(hObject, eventdata, handles)
@@ -258,6 +255,9 @@ function chapter5_Callback(hObject, eventdata, handles)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 
+set(handles.uipanel6,'visible','off');
+set(handles.uipanel7,'visible','off');
+ChapterFive
 
 % --- Executes on button press in chapter3.
 function chapter3_Callback(hObject, eventdata, handles)
@@ -266,6 +266,9 @@ function chapter3_Callback(hObject, eventdata, handles)
 % handles    structure with handles and user data (see GUIDATA)
 try
         h=ChapterThree();
+        
+set(handles.uipanel6,'visible','off');
+set(handles.uipanel7,'visible','off');
         show(h);
     catch e
 end
@@ -297,13 +300,14 @@ function pushbutton10_Callback(hObject, eventdata, handles)
 % hObject    handle to pushbutton10 (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
-
+Crammer
 
 % --- Executes on button press in pushbutton11.
 function pushbutton11_Callback(hObject, eventdata, handles)
 % hObject    handle to pushbutton11 (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
+Gausse_elimination
 
 
 % --- Executes on button press in pushbutton12.
@@ -311,27 +315,28 @@ function pushbutton12_Callback(hObject, eventdata, handles)
 % hObject    handle to pushbutton12 (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
-
+LU_Doolittle
 
 % --- Executes on button press in pushbutton13.
 function pushbutton13_Callback(hObject, eventdata, handles)
 % hObject    handle to pushbutton13 (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
-
+LU_Cholskey
 
 % --- Executes on button press in pushbutton14.
 function pushbutton14_Callback(hObject, eventdata, handles)
 % hObject    handle to pushbutton14 (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
-
+LU_Crout
 
 % --- Executes on button press in pushbutton15.
 function pushbutton15_Callback(hObject, eventdata, handles)
 % hObject    handle to pushbutton15 (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
+Jacobi
 
 
 % --- Executes on button press in pushbutton16.
@@ -339,31 +344,32 @@ function pushbutton16_Callback(hObject, eventdata, handles)
 % hObject    handle to pushbutton16 (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
-
+Gauss_sidle
 
 % --- Executes on button press in pushbutton17.
 function pushbutton17_Callback(hObject, eventdata, handles)
 % hObject    handle to pushbutton17 (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
-
+Eigens
 
 % --- Executes on button press in pushbutton18.
 function pushbutton18_Callback(hObject, eventdata, handles)
 % hObject    handle to pushbutton18 (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
-
+Power_Method
 
 % --- Executes on button press in pushbutton19.
 function pushbutton19_Callback(hObject, eventdata, handles)
 % hObject    handle to pushbutton19 (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
-
+ChapterFourIntegration
 
 % --- Executes on button press in pushbutton20.
 function pushbutton20_Callback(hObject, eventdata, handles)
 % hObject    handle to pushbutton20 (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
+ChapterFourDiff

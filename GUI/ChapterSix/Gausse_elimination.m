@@ -80,7 +80,7 @@ function pushbutton11_Callback(hObject, eventdata, handles)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 close(Gausse_elimination)
-main
+FirstPage
 
 % --- Executes on button press in pushbutton12.
 function pushbutton12_Callback(hObject, eventdata, handles)

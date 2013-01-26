@@ -1,4 +1,4 @@
-function varargout = Crammer(varargin)
+function varargout = Gausse_sidle(varargin)
 % CRAMMER MATLAB code for Crammer.fig
 %      CRAMMER, by itself, creates a new CRAMMER or raises the existing
 %      singleton*.
@@ -113,7 +113,7 @@ function pushbutton4_Callback(hObject, eventdata, handles)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 close(Gauss_sidle);
-main
+FirstPage
 
 % --- Executes on button press in pushbutton5.
 function pushbutton5_Callback(hObject, eventdata, handles)
@@ -285,15 +285,31 @@ for i = 1 : size(data, 1)
         n = n + 1;
     end
 end
-[x, dets]= cramer(n, data);
 
-primary_data=repmat({''},size(x,2),2);
-set(handles.uitable5,'data',primary_data);
-
-matrix=[0 , 0];
-for i=1:size(x,2)
-    matrix(i,1)=x(i);
-    matrix(i,2)=dets(i);
+[is_dom,A,B]=make_dominant(n,data);
+if ~is_dom
+    %A
+    %B
+    set(handles.uitable10,'data',A);
+    set(handles.uitable10,'visible','on');
+    set(handles.text15,'visible','on');
+else
+    set(handles.uitable10,'visible','off');
+    set(handles.text15,'visible','off');
 end
 
-set(handles.uitable5,'data',matrix);
+data=get(handles.uitable8,'data');
+x0=[];
+%size(cell2mat(data(3)))
+%size(data(3))
+for i=1:size(data,1)
+    if(size(cell2mat(data(i)), 1) ~= 0)    
+        x0(i)= str2num(cell2mat(data(i)));
+    end
+end
+B=transp(B);
+x0=transp(x0);
+x=gausse_slide(A, B, X);
+
+set(handles.uitable8,'data',x);
+set(handles.uitable5,'data',x);

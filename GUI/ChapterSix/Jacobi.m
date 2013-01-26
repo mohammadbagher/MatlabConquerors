@@ -122,7 +122,7 @@ function pushbutton4_Callback(hObject, eventdata, handles)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 close(Jacobi)
-main
+FirstPage
 % --- Executes on button press in pushbutton5.
 function pushbutton5_Callback(hObject, eventdata, handles)
 % hObject    handle to pushbutton5 (see GCBO)
@@ -144,7 +144,17 @@ data=get(handles.uitable3,'data');
        data(size(data,1)+1,1)=b(1);
        data(size(data,1),2)=b(1);
        set(handles.uitable3,'Data',data);
+data=get(handles.uitable8,'data');
+       b=repmat({''},1,2);
+       data(size(data,1)+1,1)=b(1);
+       data(size(data,1),2)=b(1);
+       data(size(data,1)+1,1)=b(1);
+       data(size(data,1),2)=b(1);
+       data(size(data,1)+1,1)=b(1);
+       data(size(data,1),2)=b(1);
+       set(handles.uitable8,'Data',data);
 
+       
 % --- Executes on selection change in method1.
 function method1_Callback(hObject, eventdata, handles)
 % hObject    handle to method1 (see GCBO)
