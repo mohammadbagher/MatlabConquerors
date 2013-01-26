@@ -33,7 +33,7 @@ x = a-(b-a)/3:h/10:b+(b-a)/3;
 y = func(x);
 p = plot(plot1,x,y);
 hold on;
-x = -100:0.1:100;
+x = -10:0.1:10;
 l1 = line(a,x);
 l2 = line(b,x);
 x = a-(b-a)/3:h/100:b+(b-a)/3;
