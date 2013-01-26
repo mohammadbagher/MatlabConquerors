@@ -39,6 +39,7 @@ end
 function result = is_dominant(A)
     n = size(A, 1);
     result = true;
+    A
     for i = 1 : n
         sumrem = 0;
         sumdiag = 0;
@@ -49,6 +50,9 @@ function result = is_dominant(A)
                 sumrem = sumrem + abs(A(i, j));
             end
         end
+        sumrem
+        sumdiag
+        n
         if(sumrem >= sumdiag)
             result = false;
         end

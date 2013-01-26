@@ -293,6 +293,8 @@ end
 
 [is_dom,A,B]=make_dominant(n,data);
 if ~is_dom
+    A
+    B
     set(handles.uitable10,'data',A);
     set(handles.uitable10,'visible','on');
     set(handles.text15,'visible','on');
@@ -302,8 +304,8 @@ else
 end
 data=get(handles.uitable8,'data');
 x0=[];
-for i=1:size(data2,1)
-        x0(i)= (data2(i));
+for i=1:size(data,1)
+        x0(i)= (data(i));
 end
 x=jacobi(A, B, x0);
 
