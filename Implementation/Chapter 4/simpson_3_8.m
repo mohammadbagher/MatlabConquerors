@@ -1,4 +1,4 @@
-function [ calc, exact, err, h, n ] = simpson_3_8( func, a, b, horn, horn_code, plot )
+function [ calc, exact, err, h, n ] = simpson_3_8( func, a, b, horn, horn_code, plot1 )
 %UNTITLED2 Summary of this function goes here
 %   Detailed explanation goes here
 format long;

@@ -33,19 +33,5 @@ exact = integral(func, a, b);
 err = abs(calc-exact);
 table = [xis, wis];
 
-x = a-(b-a)/3:h/10:b+(b-a)/3;
-y = func(x);
-p = plot(plot1,x,y);
-hold on;
-x = -100:0.1:100;
-l1 = line(a,x);
-l2 = line(b,x);
-x = a-(b-a)/3:h/100:b+(b-a)/3;
-xaxis = line(x,0);
-set(l1,'Color','red','LineWidth',2);
-set(l2,'Color','red','LineWidth',2);
-set(xaxis,'LineWidth',3);
-
-hold off;
 end
 
