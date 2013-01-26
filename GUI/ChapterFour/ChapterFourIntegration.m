@@ -49,6 +49,9 @@ close(ChapterFourIntegration);
 FirstPage();
 
 function solve_button_Callback(hObject, eventdata, handles)
+set(handles.table,'Visible','off');
+set(handles.plot,'Visible','on');
+
 method_code = get(handles.method, 'Value');
 a = get(handles.a, 'String');a=str2double(a);
 b = get(handles.b, 'String');b=str2double(b);
@@ -77,10 +80,17 @@ end
 if(method_code == 4)
     p = get(handles.prb, 'String');p=str2double(p);
     [ calc, exact, err, h, n, romberg_table ] = romberg(func, a, b, horn, horn_code, handles.plot, p);
+    set(handles.table,'Visible','on');
+    set(handles.plot,'Visible','off');
+    set(handles.table,'Data',romberg_table);
 end
-if(method_code == 1)
+if(method_code == 5)
     p = get(handles.pgl, 'String');p=str2double(p);
-    [ calc, exact, err, h, n ] = gauss_legendre(func, a, b, horn, horn_code, handles.plot, p);
+    [ calc, exact, err, h, n, table ] = gauss_legendre(func, a, b, horn, horn_code, handles.plot, p);
+    set(handles.table,'Visible','on');
+    set(handles.plot,'Visible','off');
+    set(handles.table,'Data',table);
+
 end
 set(handles.calc,'Enable','on');
 set(handles.exact,'Enable','on');

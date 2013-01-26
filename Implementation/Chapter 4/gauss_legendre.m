@@ -1,4 +1,4 @@
-function [ calc, exact, err, h, n] = gauss_legendre( func, a, b, horn, horn_code, plot, p )
+function [ calc, exact, err, h, n, table] = gauss_legendre( func, a, b, horn, horn_code, plot, p )
 %UNTITLED5 Summary of this function goes here
 %   Detailed explanation goes here
 format long;
@@ -31,6 +31,6 @@ for i=1:size(xis)
 end
 exact = integral(func, a, b);
 err = abs(calc-exact);
-
+table = [xis, wis];
 end
 

@@ -73,8 +73,87 @@ set(handles.r122,'Enable','on');
 set(handles.r123,'Enable','on');
 set(handles.r124,'Enable','on');
 set(handles.r131,'Enable','on');
-    
-set(handles.r111,'String','on');
+
+[ r111, r112, r113, r114, r121, r122, r123, r124, r131 ] = differentiate(x0, h1, info1);
+
+set(handles.r111,'String',r111);
+set(handles.r112,'String',r112);
+set(handles.r113,'String',r113);
+set(handles.r114,'String',r114);
+set(handles.r121,'String',r121);
+set(handles.r122,'String',r122);
+set(handles.r123,'String',r123);
+set(handles.r124,'String',r124);
+set(handles.r131,'String',r131);
+
+if(get(handles.ure_1,'Value') ~= 0)
+    h2 = get(handles.h2, 'String');h2=str2double(h2);
+    info2 = zeros(7,1);
+    if(get(handles.sel_1,'Value') ~= 0)%avvali ra feshar dade
+        info2(1,1) = feval(func, x0);
+        info2(2,1) = feval(func, x0+h2);
+        info2(3,1) = feval(func, x0+2*h2);
+        info2(4,1) = feval(func, x0+3*h2);
+        info2(5,1) = feval(func, x0-h2);
+        info2(6,1) = feval(func, x0-2*h2);
+        info2(7,1) = feval(func, x0-3*h2);
+    else
+        info2(1,1) = str2double(get(handles.g1,'String'));
+        info2(2,1) = str2double(get(handles.g2,'String'));
+        info2(3,1) = str2double(get(handles.g3,'String'));
+        info2(4,1) = str2double(get(handles.g4,'String'));
+        info2(5,1) = str2double(get(handles.g5,'String'));
+        info2(6,1) = str2double(get(handles.g6,'String'));
+        info2(7,1) = str2double(get(handles.g7,'String'));
+    end
+    set(handles.r211,'Enable','on');
+    set(handles.r212,'Enable','on');
+    set(handles.r213,'Enable','on');
+    set(handles.r214,'Enable','on');
+    set(handles.r221,'Enable','on');
+    set(handles.r222,'Enable','on');
+    set(handles.r223,'Enable','on');
+    set(handles.r224,'Enable','on');
+    set(handles.r231,'Enable','on');
+    set(handles.r311,'Enable','on');
+    set(handles.r312,'Enable','on');
+    set(handles.r313,'Enable','on');
+    set(handles.r314,'Enable','on');
+    set(handles.r321,'Enable','on');
+    set(handles.r322,'Enable','on');
+    set(handles.r323,'Enable','on');
+    set(handles.r324,'Enable','on');
+    set(handles.r331,'Enable','on');
+    [ r211, r212, r213, r214, r221, r222, r223, r224, r231 ] = differentiate(x0, h2, info2);
+    set(handles.r211,'String',r211);
+    set(handles.r212,'String',r212);
+    set(handles.r213,'String',r213);
+    set(handles.r214,'String',r214);
+    set(handles.r221,'String',r221);
+    set(handles.r222,'String',r222);
+    set(handles.r223,'String',r223);
+    set(handles.r224,'String',r224);
+    set(handles.r231,'String',r231);
+
+    set(handles.r311,'String',RE(h1, h2, r111, r211, 2));
+    set(handles.r312,'String',RE(h1, h2, r112, r212, 2));
+    set(handles.r313,'String',RE(h1, h2, r113, r213, 2));
+    set(handles.r314,'String',RE(h1, h2, r114, r214, 2));
+    set(handles.r321,'String',RE(h1, h2, r121, r221, 2));
+    set(handles.r322,'String',RE(h1, h2, r122, r222, 2));
+    set(handles.r323,'String',RE(h1, h2, r123, r223, 2));
+    set(handles.r324,'String',RE(h1, h2, r124, r224, 2));
+    set(handles.r331,'String',RE(h1, h2, r131, r231, 2));
+
+end
+
+
+
+
+
+
+
+
 
 
 % --- Executes on button press in pushbutton3.

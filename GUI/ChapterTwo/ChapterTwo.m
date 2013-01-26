@@ -459,7 +459,7 @@ function ok_button_Callback(hObject, eventdata, handles)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 func_Callback(hObject, eventdata, handles);
-method_code = get(handles.method, 'Value');
+method_code = get(handles.method, '');
 if(method_code == 11)  %GNR------------------------------------------------
     func = get(handles.func, 'String');
     index = strfind(func,'=');

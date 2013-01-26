@@ -22,5 +22,6 @@ calc = calc+fis(n+1,1)/2;
 calc = h*calc;
 exact = integral(func, a, b);
 err = abs(calc-exact);
+
 return;
 end

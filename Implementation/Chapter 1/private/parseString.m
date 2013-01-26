@@ -19,7 +19,7 @@ function result = parse_e()
     res_e_prim = parse_e_prim();
     
     name = [char(res_t(1)) char(res_e_prim(1))];
-    value = cell2mat(res_t(2)) + cell2mat(res_e_prim(2));
+    value = vpa(cell2mat(res_t(2)) + cell2mat(res_e_prim(2)));
     abs_error = cell2mat(res_t(3)) + cell2mat(res_e_prim(3));
     rel_error = abs_error / value;
     %rel_error = max(cell2mat(res_t(4)), cell2mat(res_e_prim(4)));
