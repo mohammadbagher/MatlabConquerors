@@ -1,4 +1,4 @@
-function [ calc, exact, err, h, n ] = trapezoidal(func, a, b, horn, horn_code, plot)
+function [ calc, exact, err, h, n ] = trapezoidal(func, a, b, horn, horn_code, plot1)
 %UNTITLED2 Summary of this function goes here
 %   Detailed explanation goes here
 format long;
@@ -23,5 +23,19 @@ calc = h*calc;
 exact = integral(func, a, b);
 err = abs(calc-exact);
 
+x = a-(b-a)/3:h/10:b+(b-a)/3;
+y = func(x);
+p = plot(plot1,x,y);
+hold on;
+x = -100:0.1:100;
+l1 = line(a,x);
+l2 = line(b,x);
+x = a-(b-a)/3:h/100:b+(b-a)/3;
+xaxis = line(x,0);
+set(l1,'Color','red','LineWidth',2);
+set(l2,'Color','red','LineWidth',2);
+set(xaxis,'LineWidth',3);
+
+hold off;
 return;
 end
