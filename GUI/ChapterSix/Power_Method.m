@@ -57,7 +57,7 @@ handles.output = hObject;
 
 addpath(genpath('G:\Workspace\Matlab\MatlabConquerors'));
 
-row=get(handles.edit1,'string');
+
 b=repmat({''},3,3);
 set(handles.uitable4,'data',b);
 b=repmat({''},3,1);
