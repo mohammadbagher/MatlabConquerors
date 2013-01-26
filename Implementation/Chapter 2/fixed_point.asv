@@ -37,35 +37,7 @@ if(~isnan(r))
     return;
 end
 
-g = @(x)acos(atan(func(x)));
-r = fixed_point_iterator(func,g,a,b,max_step,tol);
-if(~isnan(r))
-    return;
-end
-
-g = @(x)atan(acos(func(x)));
-r = fixed_point_iterator(func,g,a,b,max_step,tol);
-if(~isnan(r))
-    return;
-end
-g = @(x)asin(atan(func(x)));
-r = fixed_point_iterator(func,g,a,b,max_step,tol);
-if(~isnan(r))
-    return;
-end
-
-g = @(x)atan(asin(func(x)));
-r = fixed_point_iterator(func,g,a,b,max_step,tol);
-if(~isnan(r))
-    return;
-end
-g = @(x)acos(asin(func(x)));
-r = fixed_point_iterator(func,g,a,b,max_step,tol);
-if(~isnan(r))
-    return;
-end
-
-g = @(x)asin(acos(func(x)));
+g = @(x)((func(x)));
 r = fixed_point_iterator(func,g,a,b,max_step,tol);
 if(~isnan(r))
     return;

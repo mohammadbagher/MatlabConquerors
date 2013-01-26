@@ -1,4 +1,4 @@
-function [ calc, exact, err, h, n ] = trapezoidal(func, a, b, horn, horn_code, plot1)
+function [ calc, exact, err, h, n ] = trapezoidal(func, a, b, horn, horn_code, plot1, romberg)
 %UNTITLED2 Summary of this function goes here
 %   Detailed explanation goes here
 format long;
@@ -22,20 +22,26 @@ calc = calc+fis(n+1,1)/2;
 calc = h*calc;
 exact = integral(func, a, b);
 err = abs(calc-exact);
+if(nargin == 6)
 
-x = a-(b-a)/3:h/10:b+(b-a)/3;
-y = func(x);
-p = plot(plot1,x,y);
-hold on;
-x = -10:0.1:10;
-l1 = plot(a,0,'or');
-l2 = plot(b,0,'or');
-x = a-(b-a)/3:h/100:b+(b-a)/3;
-xaxis = line(x,0);
-set(l1,'Color','red','LineWidth',5);
-set(l2,'Color','red','LineWidth',5);
-set(xaxis,'LineWidth',4);
-
-hold off;
+    l1 = plot(a,0,'or');hold on;
+    l2 = plot(b,0,'or');
+    x = a-(b-a)/10:h/100:b+(b-a)/10;
+    xaxis = line(x,0);
+    set(l1,'Color','red','LineWidth',5);
+    set(l2,'Color','red','LineWidth',5);
+    set(xaxis,'LineWidth',4);
+    for i=1:n
+        area(plot1,[a+(i-1)*h a+i*h],[feval(func,a+(i-1)*h) feval(func,a+i*h)],'FaceColor', 'g');
+    end
+    x = a-(b-a)/10:h/10:b+(b-a)/10;
+    y = func(x);
+    p = plot(plot1,x,y);
+    set(p,'LineWidth',2);
+    legend('a','b',func2str(func),'Trapezoidals');
+    xlabel('x');
+    ylabel('y');
+    hold off;
+end
 return;
 end

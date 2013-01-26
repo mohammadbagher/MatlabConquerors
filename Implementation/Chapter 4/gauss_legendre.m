@@ -1,4 +1,4 @@
-function [ calc, exact, err, h, n, table] = gauss_legendre( func, a, b, horn, horn_code, plot, p )
+function [ calc, exact, err, h, n, table] = gauss_legendre( func, a, b, horn, horn_code, plot1, p )
 %UNTITLED5 Summary of this function goes here
 %   Detailed explanation goes here
 format long;
@@ -21,7 +21,7 @@ for i=2:p
     eq_1 = eq_temp;
 end
 xis = roots(eq_1);
-wis = zeros(size(xis),1);
+wis = zeros(size(xis,1),1);
 changed_func = @(t)(b-a)/2*((b-a)/2*t+(b-a)/2);
 calc = 0;
 for i=1:size(xis)

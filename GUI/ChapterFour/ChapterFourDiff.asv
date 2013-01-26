@@ -84,7 +84,7 @@ set(handles.r122,'String',r122);
 set(handles.r123,'String',r123);
 set(handles.r124,'String',r124);
 set(handles.r131,'String',r131);
-diff_plot(func,h1,x0,r121,handles.axes4);
+diff_plot(func,
 if(get(handles.ure_1,'Value') ~= 0)
     h2 = get(handles.h2, 'String');h2=str2double(h2);
     info2 = zeros(7,1);

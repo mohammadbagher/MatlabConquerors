@@ -1,8 +1,12 @@
 function [ ans1 ] = Adams_Multon(func,x0,y0,h,x_request)
 
 n=(x_request-x0)/h+1;
-corrector(1:4)=Runge_Kuttaorder4(func,x0,y0,h,min(x_request,x0+3*h));
-x0=x0+4*h;
+anstemp=Runge_Kuttaorder4(func,x0,y0,h,min(x_request,x0+3*h));
+for i=1:4
+corrector(i,2)=anstemp(i,2);
+corrector(i,1)=x0;
+x0=x0+h;
+end
 
 syms x;
 syms y;
