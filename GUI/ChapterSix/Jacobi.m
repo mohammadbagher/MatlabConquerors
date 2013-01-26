@@ -320,11 +320,20 @@ data=get(handles.uitable8,'data');
 x0=[];
 %size(cell2mat(data(3)))
 %size(data(3))
+%data
+
 for i=1:size(data,1)
-    if(size(cell2mat(data(i)), 1) ~= 0)    
-        x0(i)= str2num(cell2mat(data(i)));
+    if(iscell(data(i)))
+        if(size(cell2mat(data(i)), 1) ~= 0)    
+            x0(end+1)= str2num(cell2mat(data(i)));
+        end
+    else
+        if(data(i) ~= 0)    
+            x0(end+1)= data(i);
+        end
     end
 end
+
 B=transp(B);
 x0=transp(x0);
 x=jacobi(A, B, x0);

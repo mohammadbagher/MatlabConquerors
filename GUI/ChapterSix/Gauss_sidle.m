@@ -22,7 +22,7 @@ function varargout = Gausse_sidle(varargin)
 
 % Edit the above text to modify the response to help Crammer
 
-% Last Modified by GUIDE v2.5 25-Jan-2013 08:11:29
+% Last Modified by GUIDE v2.5 26-Jan-2013 18:00:39
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
@@ -112,7 +112,8 @@ function pushbutton4_Callback(hObject, eventdata, handles)
 % hObject    handle to pushbutton4 (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
-close(Gauss_sidle);
+global eqs;
+close(Gauss_sidle(eqs));
 FirstPage
 
 % --- Executes on button press in pushbutton5.
@@ -136,6 +137,16 @@ data=get(handles.uitable3,'data');
        data(size(data,1)+1,1)=b(1);
        data(size(data,1),2)=b(1);
        set(handles.uitable3,'Data',data);
+data=get(handles.uitable8,'data');
+       b=repmat({''},1,2);
+       data(size(data,1)+1,1)=b(1);
+       data(size(data,1),2)=b(1);
+       data(size(data,1)+1,1)=b(1);
+       data(size(data,1),2)=b(1);
+       data(size(data,1)+1,1)=b(1);
+       data(size(data,1),2)=b(1);
+       set(handles.uitable8,'Data',data);
+
 
 % --- Executes on selection change in method1.
 function method1_Callback(hObject, eventdata, handles)
@@ -302,14 +313,36 @@ data=get(handles.uitable8,'data');
 x0=[];
 %size(cell2mat(data(3)))
 %size(data(3))
+%data
+
 for i=1:size(data,1)
-    if(size(cell2mat(data(i)), 1) ~= 0)    
-        x0(i)= str2num(cell2mat(data(i)));
+    if(iscell(data(i)))
+        if(size(cell2mat(data(i)), 1) ~= 0)    
+            x0(end+1)= str2num(cell2mat(data(i)));
+        end
+    else
+        if(data(i) ~= 0)    
+            x0(end+1)= data(i);
+        end
     end
 end
+
 B=transp(B);
 x0=transp(x0);
-x=gausse_slide(A, B, X);
+x=gausse_slide(A, B, x0);
 
 set(handles.uitable8,'data',x);
 set(handles.uitable5,'data',x);
+
+
+% --- Executes when entered data in editable cell(s) in uitable5.
+function uitable5_CellEditCallback(hObject, eventdata, handles)
+
+% hObject    handle to uitable5 (see GCBO)
+% eventdata  structure with the following fields (see UITABLE)
+%	Indices: row and column indices of the cell(s) edited
+%	PreviousData: previous data for the cell(s) edited
+%	EditData: string(s) entered by the user
+%	NewData: EditData or its converted form set on the Data property. Empty if Data was not changed
+%	Error: error string when failed to convert EditData to appropriate value for Data
+% handles    structure with handles and user data (see GUIDATA)

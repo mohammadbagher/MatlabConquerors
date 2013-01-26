@@ -1,4 +1,5 @@
 function X = gausse_slide(A, B, X)
+    n = size(A, 1);
     for i  = 1 : n
         TMP = X;
         TMP(i) = 0;
