@@ -3,7 +3,10 @@ func=subs(func);
 
 syms x;
 syms y;
-n=(x_request-x0)/h+1;
+x_request
+x0
+h
+n=(x_request-x0)/h+1
 tempy=y+h*func;
 temph=h;
 tempfunc=func;
@@ -18,6 +21,7 @@ ans1(1,2)=y0;
 ans1(1,1)=x0;
 x0=x0+h;
 
+n
 
 for j=2:n
     ans1(j,1)=x0;

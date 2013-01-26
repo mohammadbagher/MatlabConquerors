@@ -153,7 +153,7 @@ method_code = get(handles.method1, 'Value');
 
 
 if method_code==2
-    ans=Taylor( func1 , 0 ,0 , 0.1 ,2 ,2);
+    ans=Taylor( func1 , x0 ,y0 , h ,steps ,x_req);
     set(handles.uitable2,'data',ans);
 elseif method_code==3
     ans=Euler(func1 , x0 , y0 , h ,x_req );

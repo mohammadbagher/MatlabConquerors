@@ -93,7 +93,7 @@ for i = 1 : size(data, 1)
         n = n + 1;
     end
 end
-[X, L, U] = doolittle(n, data);
+[X, L, U] = cholesky(n, data);
 set(handles.uitable2,'data',X);
 set(handles.uitable3,'data',L);
 set(handles.uitable4,'data',U);

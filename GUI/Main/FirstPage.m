@@ -26,6 +26,8 @@ function varargout = FirstPage(varargin)
 
 % Begin initialization code - DO NOT EDIT
 
+global eqs;
+
 gui_Singleton = 1;
 gui_State = struct('gui_Name',       mfilename, ...
                    'gui_Singleton',  gui_Singleton, ...
