@@ -54,7 +54,7 @@ function ChapterThree_OpeningFcn(hObject, eventdata, handles, varargin)
     position=get(handles.uipanel7,'position');
     set(handles.uipanel4,'Position',position);
 
-    addpath(genpath('G:\Workspace\Matlab\MatlabConquerors'));
+    addpath(genpath('C:\Users\majid\Desktop\NM\MatlabConquerors'));
     
     rgb = imread('alphaabetax.png');
     axes(handles.alphaabetax); 
