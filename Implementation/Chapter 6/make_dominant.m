@@ -5,7 +5,6 @@ function [result1, result2, B] = make_dominant(n, eqs)
     if(result1)
         return;
     end
-    
     A = [A, B];
     for i = 1 : n
         one = -1;
@@ -29,7 +28,10 @@ function [result1, result2, B] = make_dominant(n, eqs)
             end
         end
         if(is_dominant(A))
+            B = A(:,n+1);
+            A(:,n+1) = [];
             result2 = A;
+            return;
         end
     end
 end

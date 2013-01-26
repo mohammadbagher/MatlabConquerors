@@ -1,8 +1,0 @@
-function result = cholesky(n, eqs)
-    [A, B] = extract_matrix(n, eqs);
-    if(det(A) == 0)
-        result = false;
-    else
-        resu
-    X = (eye(size(A, 1)) / A) * B;
-end
