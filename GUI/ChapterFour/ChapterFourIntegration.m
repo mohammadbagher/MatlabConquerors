@@ -50,7 +50,7 @@ FirstPage();
 
 function solve_button_Callback(hObject, eventdata, handles)
 set(handles.table,'Visible','off');
-set(handles.plot,'Visible','on');
+set(handles.plot1,'Visible','on');
 
 method_code = get(handles.method, 'Value');
 a = get(handles.a, 'String');a=str2double(a);
@@ -69,26 +69,26 @@ func = strcat('@(x)(',func,')');
 func = str2func(func);
 
 if(method_code == 1)
-    [ calc, exact, err, h, n ] = trapezoidal(func, a, b, horn, horn_code, handles.plot);
+    [ calc, exact, err, h, n ] = trapezoidal(func, a, b, horn, horn_code, handles.plot1);
 end
 if(method_code == 2)
-    [ calc, exact, err, h, n ] = simpson_1_3(func, a, b, horn, horn_code, handles.plot);
+    [ calc, exact, err, h, n ] = simpson_1_3(func, a, b, horn, horn_code, handles.plot1);
 end
 if(method_code == 3)
-    [ calc, exact, err, h, n ] = simpson_3_8(func, a, b, horn, horn_code, handles.plot);
+    [ calc, exact, err, h, n ] = simpson_3_8(func, a, b, horn, horn_code, handles.plot1);
 end
 if(method_code == 4)
     p = get(handles.prb, 'String');p=str2double(p);
-    [ calc, exact, err, h, n, romberg_table ] = romberg(func, a, b, horn, horn_code, handles.plot, p);
+    [ calc, exact, err, h, n, romberg_table ] = romberg(func, a, b, horn, horn_code, handles.plot1, p);
     set(handles.table,'Visible','on');
-    set(handles.plot,'Visible','off');
+    set(handles.plot1,'Visible','off');
     set(handles.table,'Data',romberg_table);
 end
 if(method_code == 5)
     p = get(handles.pgl, 'String');p=str2double(p);
-    [ calc, exact, err, h, n, table ] = gauss_legendre(func, a, b, horn, horn_code, handles.plot, p);
+    [ calc, exact, err, h, n, table ] = gauss_legendre(func, a, b, horn, horn_code, handles.plot1, p);
     set(handles.table,'Visible','on');
-    set(handles.plot,'Visible','off');
+    set(handles.plot1,'Visible','off');
     set(handles.table,'Data',table);
 
 end
@@ -105,12 +105,6 @@ set(handles.n,'String',num2str(n,sigfig));
 
 
 function func_Callback(hObject, eventdata, handles)
-FuncString=get(handles.func,'string');
-cla(handles.tex);
-set(handles.tex,'visible','off');
-FuncString = strcat(' $$  ',FuncString,'$$');
-text1 = text('Interpreter','latex','String',FuncString);
-set(text1,'FontName','Courier New','FontSize',20);
 
 
 function func_CreateFcn(hObject, eventdata, handles)
