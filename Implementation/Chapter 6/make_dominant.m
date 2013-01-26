@@ -1,12 +1,11 @@
 function [result1, result2, B] = make_dominant(n, eqs)
     [A, B] = extract_matrix(n, eqs);
     result1 = is_dominant(A);
-    A = [A, B];
     result2 = A;
     if(result1)
         return;
     end
-    
+    A = [A, B];
     for i = 1 : n
         one = -1;
         for j = i : n
@@ -29,7 +28,10 @@ function [result1, result2, B] = make_dominant(n, eqs)
             end
         end
         if(is_dominant(A))
+            B = A(:,n+1);
+            A(:,n+1) = [];
             result2 = A;
+            return;
         end
     end
 end
