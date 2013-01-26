@@ -64,9 +64,6 @@ if(size(strtrim(func),1)==0)
 end
 func = strcat('@(x)(',func,')');
 func = str2func(func);
-t = 0:pi/100:2*pi;
-y = sin(t);
-plot(t,y);
 
 if(method_code == 1)
     [ calc, exact, err, h, n ] = trapezoidal(func, a, b, horn, horn_code, handles.plot);

@@ -22,5 +22,10 @@ calc = calc+fis(n+1,1)/2;
 calc = h*calc;
 exact = integral(func, a, b);
 err = abs(calc-exact);
+t = 0:pi/100:2*pi;
+y = sin(t);
+axes(plot);
+plot(t,y);
+
 return;
 end
