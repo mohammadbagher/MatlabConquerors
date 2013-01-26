@@ -20,8 +20,8 @@ function [result1, result2, B] = make_dominant(n, eqs)
         TMP = A(i,:);
         A(i,:) = A(one,:);
         A(one,:) = TMP;
-        for j = i + 1 : n
-            if(A(j, i) ~= 0)
+        for j = 1 : n
+            if(i~= j && A(j, i) ~= 0)
                 TMP = A(i,:) / A(i, i);
                 TMP = A(j, i) * TMP;
                 A(j,:) = A(j,:) - TMP;
