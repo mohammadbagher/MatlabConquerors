@@ -53,7 +53,7 @@ xaxis = line(x,0);
 set(l1,'Color','red','LineWidth',5);
 set(l2,'Color','red','LineWidth',5);
 set(xaxis,'LineWidth',3);
-    legend(func2str(func),'Areas','Parabolics');
+    legend('a','b',func2str(func),'Trapezoidals');
     xlabel('x');
     ylabel('y');
 
