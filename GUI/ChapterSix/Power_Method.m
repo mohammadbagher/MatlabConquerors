@@ -55,9 +55,13 @@ function Eigens_OpeningFcn(hObject, eventdata, handles, varargin)
 % Choose default command line output for Eigens
 handles.output = hObject;
 
+addpath(genpath('G:\Workspace\Matlab\MatlabConquerors'));
+
+
 b=repmat({''},3,3);
 set(handles.uitable4,'data',b);
-
+b=repmat({''},3,1);
+set(handles.uitable16,'data',b);
 % Update handles structure
 guidata(hObject, handles);
 
@@ -81,25 +85,37 @@ function pushbutton2_Callback(hObject, eventdata, handles)
 % hObject    handle to pushbutton2 (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
-
+close(Power_Method);
+main;
 
 % --- Executes on button press in pushbutton3.
 function pushbutton3_Callback(hObject, eventdata, handles)
 % hObject    handle to pushbutton3 (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
-data=get(handles.uitable4,'Data');
+data1=get(handles.uitable4,'Data');
+data2=get(handles.uitable16,'Data');
+data2(1)
 A = [];
-for i=1:size(data,1)
-    for j=1:size(data,1)
-        A(i,j)= str2num(cell2mat(data(i,j)));
+for i=1:size(data1,1)
+    for j=1:size(data1,1)
+        A(i,j)= str2num(cell2mat(data1(i,j)));
     end
 end
-L = eig(A);
-[m, V]=eig(A);
-set(handles.uitable9,'data',L);
-set(handles.uitable10,'data',m);
 
+x0=[];
+
+for i=1:size(data2,1)
+        x0(i)= (data2(i));
+end
+x0
+x0=transp(x0)
+[X,c]=power_method1(A, x0)
+
+str= strcat( 'Dominant Eigen Value = ',num2str(c));
+set(handles.text4,'string',str);
+set(handles.uitable15,'data',X);
+set(handles.uitable16,'data',X);
 
 % --- Executes on button press in pushbutton4.
 function pushbutton4_Callback(hObject, eventdata, handles)
@@ -109,8 +125,8 @@ function pushbutton4_Callback(hObject, eventdata, handles)
 row=get(handles.edit1,'string');
 b=repmat({''},str2num(row),str2num(row));
 set(handles.uitable4,'data',b);
-
-
+b=repmat({''},str2num(row),1);
+set(handles.uitable16,'data',b);
 
 
 function edit1_Callback(hObject, eventdata, handles)

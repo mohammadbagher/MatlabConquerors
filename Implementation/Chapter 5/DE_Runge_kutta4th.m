@@ -25,7 +25,7 @@ for i=2:n
     x0=x0+h;
     
     k11=subs(f,[x y z],[x0,ans1(i-1,2),ans1(i-1,3)]);
-    k21=subs(g,[x y z],[x0,ans1(1-1,2),ans1(i-1,3)]);
+    k21=subs(g,[x y z],[x0,ans1(i-1,2),ans1(i-1,3)]);
 
     k12=subs(f,[x y z],[x0+h/2,ans1(i-1,2)+h/2*k11,ans1(i-1,3)+h/2*k21]);
     k22=subs(g,[x y z],[x0+h/2,ans1(i-1,2)+h/2*k11,ans1(i-1,3)+h/2*k21]);

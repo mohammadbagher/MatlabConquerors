@@ -1,6 +1,6 @@
-function X = jacobi(n, eqs, X)
-    [A, B] = extract_matrix(n, eqs);
+function X = jacobi(A, B, X)
     res = X;
+	n = size(A, 1);
     for i  = 1 : n
         TMP = X;
         TMP(i) = 0;
