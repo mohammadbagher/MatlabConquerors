@@ -57,6 +57,9 @@ set(handles.uitable3,'Data',b);
 % Choose default command line output for Crammer
 handles.output = hObject;
 
+
+b=repmat({''},4,1);
+set(handles.uitable5,'data',b);
 b=repmat({''},4,1);
 set(handles.uitable3,'data',b);
 b=repmat({''},4,1);
@@ -118,8 +121,8 @@ function pushbutton4_Callback(hObject, eventdata, handles)
 % hObject    handle to pushbutton4 (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
-
-
+close(Jacobi)
+main
 % --- Executes on button press in pushbutton5.
 function pushbutton5_Callback(hObject, eventdata, handles)
 % hObject    handle to pushbutton5 (see GCBO)
@@ -293,8 +296,8 @@ end
 
 [is_dom,A,B]=make_dominant(n,data);
 if ~is_dom
-    A
-    B
+    %A
+    %B
     set(handles.uitable10,'data',A);
     set(handles.uitable10,'visible','on');
     set(handles.text15,'visible','on');
@@ -302,38 +305,33 @@ else
     set(handles.uitable10,'visible','off');
     set(handles.text15,'visible','off');
 end
+
 data=get(handles.uitable8,'data');
 x0=[];
+%size(cell2mat(data(3)))
+%size(data(3))
 for i=1:size(data,1)
-        x0(i)= (data(i));
+    if(size(cell2mat(data(i)), 1) ~= 0)    
+        x0(i)= str2num(cell2mat(data(i)));
+    end
 end
+B=transp(B);
+x0=transp(x0);
 x=jacobi(A, B, x0);
 
 set(handles.uitable8,'data',x);
 set(handles.uitable5,'data',x);
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-[x, dets]= cramer(n, data);
-
-primary_data=repmat({''},size(x,2),2);
-set(handles.uitable5,'data',primary_data);
-
-matrix=[0 , 0];
-for i=1:size(x,2)
-    matrix(i,1)=x(i);
-    matrix(i,2)=dets(i);
-end
-
-set(handles.uitable5,'data',matrix);
+% 
+% 
+% primary_data=repmat({''},size(x,2),2);
+% set(handles.uitable5,'data',primary_data);
+% 
+% matrix=[0 , 0];
+% for i=1:size(x,2)
+%     matrix(i,1)=x(i);
+%     matrix(i,2)=dets(i);
+% end
+% 
+% set(handles.uitable5,'data',matrix);

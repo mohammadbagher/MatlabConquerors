@@ -22,7 +22,7 @@ function varargout = ChapterThree(varargin)
 
 % Edit the above text to modify the response to help ChapterThree
 
-% Last Modified by GUIDE v2.5 25-Jan-2013 10:57:14
+% Last Modified by GUIDE v2.5 26-Jan-2013 05:15:58
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
@@ -444,3 +444,12 @@ function figure1_CreateFcn(hObject, eventdata, handles)
 % hObject    handle to figure1 (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    empty - handles not created until after all CreateFcns called
+
+
+% --- Executes on button press in pushbutton2.
+function pushbutton2_Callback(hObject, eventdata, handles)
+% hObject    handle to pushbutton2 (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+close(ChapterThree);
+FirstPage;

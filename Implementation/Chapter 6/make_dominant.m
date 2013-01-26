@@ -50,9 +50,6 @@ function result = is_dominant(A)
                 sumrem = sumrem + abs(A(i, j));
             end
         end
-        sumrem
-        sumdiag
-        n
         if(sumrem >= sumdiag)
             result = false;
         end

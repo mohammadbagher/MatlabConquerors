@@ -1,5 +1,6 @@
 function X = jacobi(A, B, X)
     res = X;
+	n = size(A, 1);
     for i  = 1 : n
         TMP = X;
         TMP(i) = 0;
